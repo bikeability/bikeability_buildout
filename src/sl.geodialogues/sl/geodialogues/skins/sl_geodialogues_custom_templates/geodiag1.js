@@ -79,7 +79,7 @@ function initializeGoogleMap() {
 	
 	if (GBrowserIsCompatible()) {
 	    map = new GMap2(document.getElementById("map"));
-	    map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+	    map.setCenter(new GLatLng(55.684166, 12.544606 ), 13);
 	    map.addControl(new GSmallMapControl());
 	    map.addControl(new GMapTypeControl());
 	    map.clearOverlays();
@@ -213,7 +213,7 @@ function saveData() {
   
 function buildAddGoodHTML(x) {
 	if (GOOD_COUNTER<= MAX_GOOD_AND_BADS) {
-		jq('<div class="inserted-option-box" id="gc-' + GOOD_COUNTER + '"><div class="addbox-label">Type: </div><div class="addbox"><div class="">' + getGoodDropBox(GOOD_COUNTER) + '</div></div><div><div class="addbox-label"> Kommentar:</div><textarea rows="3" cols="20"></textarea> <div id="ok-2-1"> ' + buildOKButton(GOOD_COUNTER) + '</div><div id="clear-' + GOOD_COUNTER + '" style="clear:both"></div>').insertAfter(x);
+		jq('<div class="inserted-option-box" id="gc-' + GOOD_COUNTER + '"><div class="addbox-label">Type: </div><div class="addbox"><div class="">' + getGoodDropBox(GOOD_COUNTER) + '</div></div><div><div class="addbox-label"> Kommentar:</div><textarea rows="3" cols="20"></textarea> <div id="ok-2-1"> ' + buildOKButton(GOOD_COUNTER) + '</div><div id="clear-' + GOOD_COUNTER + '" style="clear:both"></div>').insertBefore(x);
 		var b_id = "#ok-" + GOOD_COUNTER;
 		var xx = "#clear-" + String(GOOD_COUNTER); 
 		jq(b_id).button({icons: {primary:'ui-icon-circle-check'}, text: false});
@@ -236,7 +236,7 @@ function buildAddGoodHTML(x) {
 
 function buildAddBadHTML(x) {
 	if (BAD_COUNTER<= MAX_GOOD_AND_BADS) {
-		jq('<div class="inserted-option-box" id="gc-' + BAD_COUNTER + '"><div class="addbox-label">Type: </div><div class="addbox"><div class="">' + getBadDropBox(BAD_COUNTER) + '</div></div><div><div class="addbox-label"> Kommentar:</div><textarea rows="3" cols="20"></textarea> <div id="ok-3-1"> ' + buildOKButton(BAD_COUNTER) + '</div><div id="clear-' + BAD_COUNTER + '" style="clear:both"></div>').insertAfter(x);
+		jq('<div class="inserted-option-box" id="gc-' + BAD_COUNTER + '"><div class="addbox-label">Type: </div><div class="addbox"><div class="">' + getBadDropBox(BAD_COUNTER) + '</div></div><div><div class="addbox-label"> Kommentar:</div><textarea rows="3" cols="20"></textarea> <div id="ok-3-1"> ' + buildOKButton(BAD_COUNTER) + '</div><div id="clear-' + BAD_COUNTER + '" style="clear:both"></div>').insertBefore(x);
 		var b_id = "#ok-" + BAD_COUNTER;
 		var xx = "#clear-" + String(BAD_COUNTER); 
 		jq(b_id).button({icons: {primary:'ui-icon-circle-check'}, text: false});
@@ -293,9 +293,8 @@ function activateTwo() {
 	deactivateThree();
 	deactivateOne();
 	jq("#wrapper-2").css("background-color","#FF0000");
-	jq("#b2").css("background-image",'url(dot-red.png)');
 	jq("#button-2").unbind();
- 	buildAddGoodHTML("#wrapper-2"); 
+ 	buildAddGoodHTML("#injector-area-2"); 
  	saveData();
 	placeGoodMarker();
 }
@@ -304,7 +303,7 @@ function activateTwo() {
 function deactivateTwo() {
 	TWO_ACTIVE = false;
 	jq("#wrapper-2").css("background-color","grey");	
-	jq("#b2").css("background-image",'url(dot-grey.png)');
+	// jq("#b2").css("background-image",'url(dot-grey.png)');
 }
 
 function activateThree() {
@@ -312,14 +311,13 @@ function activateThree() {
 	deactivateTwo();
 	deactivateOne();
 	jq("#wrapper-3").css("background-color","#FF0000");
-	jq("#b3").css('background-image','../dot-red.png');
+	buildAddBadHTML("#injector-area-3");
+	saveData()
 	placeBadMarker();
 }
 
 function deactivateThree() {
 	THREE_ACTIVE = false;
-	jq("#text3").css("background-color","grey");
-	jq("#b3").css("background-image",'url(dot-grey.png)');	
 } 
  
 function getColor(named) {
@@ -354,20 +352,16 @@ function initializeButtons() {
  	
  	
  	jq("#button-2").bind("click", function() {
+ 		jq("#button-2").unbind();
  		activateTwo();
+ 		
  				
  	});
 
  	jq("#button-3").bind("click", function() {
+ 		jq("#button-3").unbind();
 	 	activateThree();
-		jq("#button-3").unbind();
- 		buildAddBadHTML("#wrapper-3"); 
 	});
-
- 	jq("#button-4").bind("click", function() {
- 		
- 	});
- 		
 }
 
 function switchOffMarker() {
@@ -443,6 +437,6 @@ function placeBadMarker() {
 	  	} 
 	  });
   } else {
-  	alert("[TODO] klik paa plus t.h.");
+  	// alert("[TODO] klik paa plus t.h.");
   }
 }

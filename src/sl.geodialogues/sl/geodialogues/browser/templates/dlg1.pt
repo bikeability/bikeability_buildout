@@ -18,8 +18,6 @@ i18n:domain="sl.bikeability">
 			<tal:main-macro metal:define-macro="main"
 			tal:define="request request|here/request|container/request|nothing;">
 				<form tal:define="respondentid request/respondentid|nothing">
-					<div id="header">
-					</div>
 					<div id="headline">
 						<h2>
 							BESKRIV DIN RUTE 
@@ -38,15 +36,13 @@ i18n:domain="sl.bikeability">
 							<!-- button 1 starts here -->
 
 							<div id="button-1" class="button">
-								<div id="b1" class="button-point">
-									1
-								</div>
+								
 								<div id="wrapper-1" class="b-wrapper">
 									<div class="button-text" id="text1" i18n:translate="tegn_din_rute">
-										TEGN DIN RUTE
+										1. TEGN DIN RUTE
 									</div>
 									<div id="b1-ok" class="okbutt">
-										<button id="button-1-ok" class="box-button"></button>
+										<!--<button id="button-1-ok" class="box-button"></button>-->
 									</div>
 									<div style="clear:both">
 									</div>
@@ -60,15 +56,13 @@ i18n:domain="sl.bikeability">
 							<!-- button 2 starts here -->
 							
 							<div id="button-2" class="button">
-								<div id="b2" class="button-point">
-									2
-								</div>
+								
 								
 								<div>
 								
 									<div id="wrapper-2" class="b-wrapper">
 										<div class="button-text" id="text2" i18n:translate="gode_oplevelser">
-											GODE OPLEVELSER
+											2. GODE OPLEVELSER
 										</div>
 									</div>
 									<div id="injector-area-2">
@@ -87,15 +81,13 @@ i18n:domain="sl.bikeability">
 							
 							<!-- button 3 starts here -->
 							<div id="button-3" class="button">
-								<div id="b3" class="button-point">
-									3
-								</div>
+								
 								
 								<div>
 								
 									<div id="wrapper-3" class="b-wrapper">
 										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
-											D&Aring;RLIGE OPLEVELSER
+											3. D&Aring;RLIGE OPLEVELSER
 										</div>
 									</div>
 									<div id="injector-area-3">

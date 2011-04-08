@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="sl.geodialogues">
+
+  <five:registerPackage package="." initialize=".initialize" />
+  <include package=".browser" />
+  <include file="skins.zcml" />
+  <include file="profiles.zcml" />
+  
+ <class class=".measurement.Measurement">
+	        <require
+	            permission="zope2.View"
+            interface=".interfaces.IMeasurement"
+            />	       
+            <require
+	            permission="cmf.ModifyPortalContent"           
+	            set_schema=".interfaces.IMeasurement"
+	            />
+	    </class>
+
+
+</configure>

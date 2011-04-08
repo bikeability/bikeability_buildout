@@ -1,0 +1,2 @@
+/Library/Frameworks/Python.framework/Versions/2.6/bin/python bootstrap.py
+./bin/buildout -Nvvvv

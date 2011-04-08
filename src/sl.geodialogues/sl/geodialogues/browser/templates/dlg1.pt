@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal"
+xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+lang="en"
+metal:use-macro="here/bikeability_main_template/macros/master"
+i18n:domain="sl.bikeability">
+
+	<head>
+		<metal:block metal:fill-slot="head_slot">
+			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA-O3c-Om9OcvXMOJXreXHAxQGj0PqsCtxKvarsoS-iqLdqZSKfxS27kJqGZajBjvuzOBLizi931BUow" type="text/javascript">
+			</script>
+		</metal:block>
+	</head>
+	<body>
+		<metal:block fill-slot="top_slot" tal:define="dummy python:request.set('disable_border',1)" />
+		<metal:main fill-slot="main">
+			<tal:main-macro metal:define-macro="main"
+			tal:define="request request|here/request|container/request|nothing;">
+				<form tal:define="respondentid request/respondentid|nothing">
+					<div id="header">
+					</div>
+					<div id="headline">
+						<h1 tal:content="respondentid"></h1>
+						<h2>
+							BESKRIV DIN RUTE 
+						</h2>
+						<div id="wheel"></div>
+						<div onclick="saveData()">---</div>
+					</div>
+					<div id="action-zone">
+						<div id="map-spacer">
+							
+						</div>
+						<div id="map">
+						</div>
+						<div id="button-wrapper">
+
+
+							<!-- button 1 starts here -->
+
+							<div id="button-1" class="button">
+								<div id="b1" class="button-point">
+									1
+								</div>
+								<div id="wrapper-1" class="b-wrapper">
+									<div class="button-text" id="text1" i18n:translate="tegn_din_rute">
+										TEGN DIN RUTE
+									</div>
+									<div id="b1-ok" class="okbutt">
+										<button id="button-1-ok" class="box-button"></button>
+									</div>
+									<div style="clear:both">
+									</div>
+								</div>
+								<div style="clear:both;">
+								</div>
+							</div>
+							<div style="clear:both;">
+							</div>
+							
+							<!-- button 2 starts here -->
+							
+							<div id="button-2" class="button">
+								<div id="b2" class="button-point">
+									2
+								</div>
+								
+								<div>
+								
+									<div id="wrapper-2" class="b-wrapper">
+										<div class="button-text" id="text2" i18n:translate="gode_oplevelser">
+											GODE OPLEVELSER
+										</div>
+									</div>
+									<div id="injector-area-2">
+										
+									</div>
+								</div>
+								
+								<div style="clear:both;">
+								</div>
+							</div>
+							
+							<!-- button 2 ends here -->
+							
+							<div style="clear:both;">
+							</div>
+							
+							<!-- button 3 starts here -->
+							<div id="button-3" class="button">
+								<div id="b3" class="button-point">
+									3
+								</div>
+								
+								<div>
+								
+									<div id="wrapper-3" class="b-wrapper">
+										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
+											D&Aring;RLIGE OPLEVELSER
+										</div>
+									</div>
+									<div id="injector-area-3">
+										
+									</div>
+								</div>
+								
+								<div style="clear:both;">
+								</div>
+							</div>
+							
+							<!--button 3 ends here -->
+							
+							<div style="clear:both;">
+							</div>
+							
+							
+							
+							<!--
+							<div id="button-4" class="button">
+								<div id="b4" class="button-point">
+									4
+								</div>
+								<div id="wrapper-4" class="b-wrapper">
+									<div class="button-text" id="text4">
+										GEM & LUK VINDUE
+									</div>
+								</div>
+								<div style="clear:both;">
+								</div>
+							</div>
+							<div style="clear:both;">
+							</div>-->
+						</div>
+						<div style="clear:both;">
+						</div>
+					</div>
+					<div id="no-marker-set">
+						Du har ikke endnu markeret stedet p&aring; kortet.
+						Klik p&aring; kortet for at markere oplevelsesstedet.
+					</div>
+					
+					<script type="text/javascript">
+						$(document).ready( function() {
+						initializeGoogleMap();
+						initializeButtons();
+						initializeNoMarkerSetDlg();
+						});
+					</script>
+					
+					<script type="text/javascript" tal:content="string:var PORTAL_URL='${here/portal_url}/';"></script>
+					
+					<div tal:omit-tag="" tal:condition="respondentid">
+						<script type="text/javascript" tal:content="string:var RESPONDENTID='${respondentid}';"></script>
+					</div>
+					
+					<input name="polygon" id="polygon" type="hidden" />
+					<input name="good_markers" id="good_markers" type="hidden" />
+					<input name="bad_markers" id="bad_markers" type="hidden" />
+					
+				</form>
+			</tal:main-macro>
+		</metal:main>
+	</body>
+</html>
+

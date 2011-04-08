@@ -1,0 +1,27 @@
+Metadata-Version: 1.0
+Name: sl.geodialogues
+Version: 0.1dev
+Summary: TODO
+Home-page: http://bikeability.dk/
+Author: BS
+Author-email: besn@life.ku.dk
+License: GPL
+Description: Introduction
+        ============
+        
+        naisnai
+        
+        Changelog
+        =========
+        
+        0.1 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Keywords: web zope plone theme
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

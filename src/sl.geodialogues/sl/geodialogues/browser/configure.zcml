@@ -1,0 +1,54 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="sl.geodialogues">
+
+  <!-- 'GeoDialogues' Zope 3 browser layer -->
+  <interface
+      interface=".interfaces.IThemeSpecific"
+      type="zope.publisher.interfaces.browser.IBrowserSkinType"
+      name="GeoDialogues"
+      />
+  
+  <!-- Viewlets registration -->
+  <!-- Zope 3 browser resources -->
+
+  <!-- Resource directory for images -->
+  <browser:resourceDirectory
+      name="sl.geodialogues.images"
+      directory="images"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <!-- Resource directory for stylesheets -->
+  <browser:resourceDirectory
+      name="sl.geodialogues.stylesheets"
+      directory="stylesheets"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <!-- Resource directory for javascripts -->
+  <browser:resourceDirectory
+      name="sl.geodialogues.javascripts"
+      directory="javascripts"
+      layer=".interfaces.IThemeSpecific"
+      />
+      
+    <browser:page
+		for="*"
+		name="dlg1"
+		permission="zope2.View"
+		class=".bikeability_dialogue.BikeabilityDialogue1"
+		layer=".interfaces.IThemeSpecific"
+		/>
+
+    <browser:page
+		for="*"
+		name="dlg1_save"
+		permission="zope2.View"
+		class=".bikeability_dialogue.BikeabilityDialogue1Save"
+		layer=".interfaces.IThemeSpecific"
+		/>      
+      
+
+</configure>

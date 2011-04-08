@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<object name="portal_skins" allow_any="False" cookie_persistence="False"
+   default_skin="GeoDialogues">
+
+ <object name="sl_geodialogues_custom_images"
+    meta_type="Filesystem Directory View"
+    directory="sl.geodialogues:skins/sl_geodialogues_custom_images"/>
+ <object name="sl_geodialogues_custom_templates"
+    meta_type="Filesystem Directory View"
+    directory="sl.geodialogues:skins/sl_geodialogues_custom_templates"/>
+ <object name="sl_geodialogues_styles"
+    meta_type="Filesystem Directory View"
+    directory="sl.geodialogues:skins/sl_geodialogues_styles"/>
+
+ <skin-path name="GeoDialogues" based-on="Plone Default">
+  <layer name="sl_geodialogues_custom_images"
+     insert-after="custom"/>
+  <layer name="sl_geodialogues_custom_templates"
+     insert-after="sl_geodialogues_custom_images"/>
+  <layer name="sl_geodialogues_styles"
+     insert-after="sl_geodialogues_custom_templates"/>
+ </skin-path>
+
+</object>

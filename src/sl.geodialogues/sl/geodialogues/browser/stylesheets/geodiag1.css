@@ -1,0 +1,109 @@
+<dtml-with "context.base_properties">
+<dtml-let portal_url="context.absolute_url()">
+
+
+/* Stylesheet for the 'GeoDialogues' Plone theme */
+
+h2 {
+	font-size: 100px;
+}
+
+#button-wrapper {
+	float:left;
+}
+
+#map {
+	float:left;
+	width:500px;
+	height:300px;
+}
+
+.b-wrapper {
+	float:left;
+	background-color: grey;
+	margin-top:13px;
+	height:30px;
+	width:280px;
+}
+
+.button {
+	padding-left:10px;
+	/*float:left;*/
+	padding-bottom: 10px;
+}
+
+.button-point {
+	float : left;
+	width : 33px;
+	height : 46px;
+	color : white;
+	padding-left:20px;
+	padding-top:10px;
+}
+
+.button-text {
+	color:white;
+	width:220px;
+	/*background-color: #999999;*/
+	/*margin-left: 53px;*/
+	margin-top:5px;
+	height:24px;
+	/*padding-top: 6px*/
+	float:left;
+}
+
+.okbutt {
+	float : left;
+}
+
+.box-button {
+	padding-top:10px;
+}
+
+#b1 {
+	background-image:url("../dot-red.png");
+}
+
+#b2 {
+	background-image:url("../dot-grey.png");
+}
+
+#b3 {
+	background-image:url("../dot-grey.png");
+}
+
+#b4 {
+	background-image:url("../dot-grey.png");
+}
+
+#header {
+	background-image: url("../header.png");
+	width : 600px;
+	height: 98px;
+}
+.point {
+	float:left;
+}
+
+.addbox {
+    background-color: lighgrey;
+    height: 20px;
+    margin-left: 60px;
+    width: 220px;	
+}
+
+.addbox-label {
+	float:left;
+	width:100px;
+	padding-bottom : 3px;
+}
+
+.inserted-option-box {
+	float:left;
+	background-color: lightgrey;
+	 padding-top: 3px;
+}
+
+
+</dtml-let>
+</dtml-with>

@@ -8,7 +8,7 @@ i18n:domain="sl.bikeability">
 
 	<head>
 		<metal:block metal:fill-slot="head_slot">
-			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA-O3c-Om9OcvXMOJXreXHAxQGj0PqsCtxKvarsoS-iqLdqZSKfxS27kJqGZajBjvuzOBLizi931BUow" type="text/javascript">
+			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAdZy7KPNU5G-nLj85ppZWRRRPrglaROPTktcBxiTGweSIT8VhshRShbbhz13Zro0_5nF6BMYpBhkntg" type="text/javascript">
 			</script>
 		</metal:block>
 	</head>

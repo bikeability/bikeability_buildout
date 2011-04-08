@@ -7,4 +7,11 @@
     cacheable="True" compression="safe" cookable="True"
     enabled="1" expression=""/>
 
+ <stylesheet title=""
+    id="jquery-ui-1.8.11.custom.css"
+    media="screen" rel="stylesheet" rendering="import"
+    cacheable="True" compression="safe" cookable="True"
+    enabled="1" expression=""/>
+
+
 </object>

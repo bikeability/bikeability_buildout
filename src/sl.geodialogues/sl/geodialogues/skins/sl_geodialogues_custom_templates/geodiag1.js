@@ -137,7 +137,7 @@ function drawRoute(){
 }
 
 function select(x) {
-	alert(x);
+	//alert(x);
 }
 
 
@@ -205,7 +205,7 @@ function saveData() {
 		context: document.body,
 		success: function(){
 			jq("#wheel").css("background-image",'');
-			alert("saved");
+			// alert("saved");
 			}
 	});
 	
@@ -258,7 +258,7 @@ function buildAddBadHTML(x) {
 }
  
 function OkClicked(ok_id) {
-	alert(ok_id);	
+	// alert(ok_id);	
 }
  
 function getGoodDropBox(c) {
@@ -347,7 +347,7 @@ function initializeButtons() {
  		
  		jq("#button-1").unbind();
  		jq("#b1-ok").bind("click", function() {
- 			alert("ok clicked");
+ 			// alert("ok clicked");
  			jq("#text1").css("background-color","grey");	
  		});
  	});
@@ -406,13 +406,13 @@ function placeGoodMarker() {
 	  	} 
 	  });
   } else {
-  	alert("[TODO] klik paa plus t.h.");
+  	// alert("[TODO] klik paa plus t.h.");
   }
 }
 
 
 /*
- * placeMarker()
+ * placeBadMarker()
  * 
  * Switches on the place marker functionality
  */

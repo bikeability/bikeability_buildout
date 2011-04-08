@@ -21,12 +21,10 @@ i18n:domain="sl.bikeability">
 					<div id="header">
 					</div>
 					<div id="headline">
-						<h1 tal:content="respondentid"></h1>
 						<h2>
 							BESKRIV DIN RUTE 
 						</h2>
 						<div id="wheel"></div>
-						<div onclick="saveData()">---</div>
 					</div>
 					<div id="action-zone">
 						<div id="map-spacer">

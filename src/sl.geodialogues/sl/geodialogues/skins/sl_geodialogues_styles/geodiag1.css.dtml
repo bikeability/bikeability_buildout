@@ -7,10 +7,6 @@
 
 /* Stylesheet for the 'GeoDialogues' Plone theme */
 
-/* -----------------------------------*/
-/* ------->>> RESET ELEMENTS <<<------*/
-/* -----------------------------------*/
-/* v1.0 | 20080212 */ 
 
 
 h2 {
@@ -19,27 +15,29 @@ h2 {
 
 #button-wrapper {
 	float:left;
+	width:30em;
 }
 
 #map {
 	float:left;
 	width:500px;
-	height:300px;
+	height:500px;
 }
 
 .b-wrapper {
 	/*float:left;*/
-	background-color: #808080;
+	
 	/*margin-top:13px;*/
 	height:30px;
-	width:280px;
 	cursor:pointer;
+	background-color:lightgray;
 }
 
 .button {
 	padding-left:10px;
 	/*float:left;*/
 	padding-bottom: 10px;
+	/*background-color: #808080;*/
 }
 
 .button-point {
@@ -59,7 +57,7 @@ h2 {
 	margin-top:5px;
 	height:24px;
 	/*padding-top: 6px*/
-	float:left;
+	/*float:left;*/
 }
 
 .okbutt {
@@ -92,5 +90,11 @@ h2 {
 	background-color: #808080;
 }
 
-
+.explanation { 
+ width : 280px;
+ margin:5px;
+}
+.explanation a {
+	font-weight: bold;
+}
 /* </dtml-with> */

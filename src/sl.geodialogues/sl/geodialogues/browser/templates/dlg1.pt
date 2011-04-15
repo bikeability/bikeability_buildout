@@ -8,8 +8,9 @@ i18n:domain="sl.bikeability">
 
 	<head>
 		<metal:block metal:fill-slot="head_slot">
-			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAdZy7KPNU5G-nLj85ppZWRRRPrglaROPTktcBxiTGweSIT8VhshRShbbhz13Zro0_5nF6BMYpBhkntg" type="text/javascript">
-			</script>
+			<!--<script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=ABQIAAAAdZy7KPNU5G-nLj85ppZWRRRPrglaROPTktcBxiTGweSIT8VhshRShbbhz13Zro0_5nF6BMYpBhkntg" type="text/javascript">
+		</script>-->
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		</metal:block>
 	</head>
 	<body>
@@ -17,7 +18,7 @@ i18n:domain="sl.bikeability">
 		<metal:main fill-slot="main">
 			<tal:main-macro metal:define-macro="main"
 			tal:define="request request|here/request|container/request|nothing;">
-				<form tal:define="respondentid request/respondentid|nothing">
+				<div tal:define="respondentid request/respondentid|nothing">
 					<div id="headline">
 						<h2>
 							BESKRIV DIN RUTE 
@@ -26,60 +27,60 @@ i18n:domain="sl.bikeability">
 					</div>
 					<div id="action-zone">
 						<div id="map-spacer">
-							
 						</div>
+						
 						<div id="map">
 						</div>
+						<form>
+						
 						<div id="button-wrapper">
-
-
 							<!-- button 1 starts here -->
 
 							<div id="button-1" class="button">
 								
 								<div id="wrapper-1" class="b-wrapper">
-									<div class="button-text" id="text1" i18n:translate="tegn_din_rute">
+									<div class="button-text" id="text1">
 										1. TEGN DIN RUTE
 									</div>
-									<div id="b1-ok" class="okbutt">
-										<!--<button id="button-1-ok" class="box-button"></button>-->
-									</div>
-									<div style="clear:both">
-									</div>
 								</div>
-								<div style="clear:both;">
+								<div class="instruction" id="polyline-instruction">
+									Klik p&aring; kortet og tegn din rute. Afslut ved at dobbeltklikke.
+									Du kan tilfoslash;je punkter p&aring; et linjesegment ved at klikke p&aring firkantet i dets midte. 
+									Klik <a>her</a> for at starte forfra. 
 								</div>
-							</div>
-							<div style="clear:both;">
+								
 							</div>
 							
 							<!-- button 2 starts here -->
 							
 							<div id="button-2" class="button">
-								
-								
-								<div>
-								
+																
 									<div id="wrapper-2" class="b-wrapper">
 										<div class="button-text" id="text2" i18n:translate="gode_oplevelser">
 											2. GODE OPLEVELSER
 										</div>
 									</div>
+									<div class="instruction" id="good-instruction">
+										Klik p&aring; kortet hvor du har haft en god oplevelse. 
+										Beskriv oplevelsen i boblen som vises efter du har klikket p&aring; kortet.. 
+									</div>
 									<div id="injector-area-2">
 										
 									</div>
-								</div>
 								
-								<div style="clear:both;">
-								</div>
+							<!--	<div style="clear:both;">
+							</div>-->
 							</div>
+							
+							
 							
 							<!-- button 2 ends here -->
-							
+							<!--
 							<div style="clear:both;">
 							</div>
-							
+							-->
 							<!-- button 3 starts here -->
+							
 							<div id="button-3" class="button">
 								
 								
@@ -120,11 +121,27 @@ i18n:domain="sl.bikeability">
 								</div>
 							</div>
 							<div style="clear:both;">
-							</div>-->
-						</div>
+							</div>
+							
+						</div>-->
 						<div style="clear:both;">
 						</div>
+					</form>
+					<input name="good-text0" id="good-text0" />
+					<input name="good-text1" id="good-text1" />
+					<input name="good-text2" id="good-text2" />
+					<input name="good-drop0" id="good-drop0" />
+					<input name="good-drop1" id="good-drop1" />
+					<input name="good-drop2" id="good-drop2" />
+					<input name="bad-text0" id="bad-text0" />
+					<input name="bad-text1" id="bad-text1" />
+					<input name="bad-text2" id="bad-text2" />
+					<input name="bad-drop0" id="bad-drop0" />
+					<input name="bad-drop1" id="bad-drop1" />
+					<input name="bad-drop2" id="bad-drop2" />
+					
 					</div>
+					
 					<div id="no-marker-set">
 						Du har ikke endnu markeret stedet p&aring; kortet.
 						Klik p&aring; kortet for at markere oplevelsesstedet.
@@ -132,9 +149,16 @@ i18n:domain="sl.bikeability">
 					
 					<script type="text/javascript">
 						$(document).ready( function() {
-						initializeGoogleMap();
+						var g = google.maps;
+						
+						initMap('map');
+						initPolyline();
 						initializeButtons();
-						initializeNoMarkerSetDlg();
+						
+						/*initializeGoogleMap();
+						/
+						/initializeNoMarkerSetDlg();*/
+						
 						});
 					</script>
 					
@@ -148,7 +172,9 @@ i18n:domain="sl.bikeability">
 					<input name="good_markers" id="good_markers" type="hidden" />
 					<input name="bad_markers" id="bad_markers" type="hidden" />
 					
-				</form>
+					
+				</div>
+
 			</tal:main-macro>
 		</metal:main>
 	</body>

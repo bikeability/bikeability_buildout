@@ -18,7 +18,7 @@ i18n:domain="sl.bikeability">
 		<metal:main fill-slot="main">
 			<tal:main-macro metal:define-macro="main"
 			tal:define="request request|here/request|container/request|nothing;">
-				<div tal:define="respondentid request/respondentid|nothing">
+				<div tal:define="respondentid request/respondentid|view/respondentid">
 					<div id="headline">
 						<h2>
 							BESKRIV DIN RUTE 
@@ -46,7 +46,7 @@ i18n:domain="sl.bikeability">
 								<div id="ba1" class="button-activate">Klik her for at forts&aelig;tte med at tegne din rute</div>
 								<div class="instruction" id="instruction1">
 									Klik p&aring; kortet og tegn din rute.
-									Du kan tilfoslash;je punkter p&aring; et linjesegment ved at klikke p&aring firkantet i dets midte. 
+									Du kan tilfoslash;je punkter p&aring; et linjesegment ved at klikke p&aring firkanten i dets midte. 
 									Tr&aelig;k og slip p&aring; firkanterne for at tilpasse ruten. 
 									Klik <a onclick="redrawRoute()">her</a> for at starte forfra. 
 								</div>
@@ -65,8 +65,8 @@ i18n:domain="sl.bikeability">
 									<div id="ba2" class="button-activate">Klik her for at tilf&oslash;je steder med gode oplevelser</div>
 									
 									<div class="instruction" id="instruction2">
-										Marker de 3 steder hvor du havde d&aring;rlige oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
-										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en d&aring;rlige oplevelse. 
+										Marker de 3 steder hvor du havde gode oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
+										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en god oplevelse. 
 									</div>
 								
 
@@ -88,7 +88,7 @@ i18n:domain="sl.bikeability">
 									<div id="ba3" class="button-activate">Klik her for at tilf&oslash;je steder med d&aring;rlige oplevelser</div>
 									<div class="instruction" id="instruction3">
 										Marker de 3 steder hvor du havde d&aring;rlige oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
-										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en d&aring;rlige oplevelse. 
+										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en d&aring;rlig oplevelse. 
 									</div>
 								</div>
 								
@@ -124,6 +124,7 @@ i18n:domain="sl.bikeability">
 					<input name="bad-coord2" id="bad-coord2" />
 					<br/>
 					<input name="polyline" id="polyline" />
+					<input name="respondentid" id="respondentid" tal:attributes="value respondentid"/>
 
 					</form>
 					</div>
@@ -148,6 +149,10 @@ i18n:domain="sl.bikeability">
 					
 					<div tal:omit-tag="" tal:condition="respondentid">
 						<script type="text/javascript" tal:content="string:var RESPONDENTID='${respondentid}';"></script>
+					</div>
+					
+					<div tal:omit-tag="" tal:condition="not:respondentid">
+						<script type="text/javascript" tal:content="string:var RESPONDENTID='NULL';"></script>
 					</div>
 					
 					<input name="polygon" id="polygon" type="hidden" />

@@ -5,6 +5,8 @@ from zope.app.component.hooks import getSite
 import transaction
 from DateTime import DateTime
 from random import random
+from Products.CMFPlone.utils import _createObjectByType
+
 
 class BikeabilityDialogue1(BrowserView):
     """
@@ -23,6 +25,19 @@ class BikeabilityDialogue1(BrowserView):
         """
         """
         super(BrowserView, self).__init__(context, request)
+        
+    def respondentid(self):
+        now=DateTime()
+        time='%s.%s' % (now.strftime('%Y-%m-%d'), str(now.millis())[7:])
+        rand=str(random())[2:6]
+        prefix=''
+        suffix=''
+        prefix ="Measurement."
+        prefix=prefix.lower()
+
+        return prefix+time+rand+suffix
+        
+        
         
         
 class BikeabilityDialogue1Save(BrowserView):
@@ -45,30 +60,18 @@ class BikeabilityDialogue1Save(BrowserView):
         
         values = {'respondentid':respondentid, 
                   'measurement' : str(form)}
-        
+    
         
         if respondentid in getSite().keys():
             print "updating " + respondentid
             new_object = getSite()[respondentid]
+        
         else:
-            print "New object"
-            if respondentid !="NULL":
-                objid = site.invokeFactory("Measurement", respondentid)
-                
-            else:
-                now=DateTime()
-                time='%s.%s' % (now.strftime('%Y-%m-%d'), str(now.millis())[7:])
-                rand=str(random())[2:6]
-                prefix=''
-                suffix=''
-
-                prefix ="Measurement."
-                prefix=prefix.lower()
-
-                id = prefix+time+rand+suffix
-                objid = site.invokeFactory("Measurement", id)
-                
+            print "New object " + respondentid
+            objid = site.invokeFactory("Measurement", respondentid)
+            # objid = _createObjectByType("Measurement", getSite(), respondentid)
             new_object = site[objid]
         
-        new_object.processForm(metadata=1, values=values)
+        new_object.setMeasurement(str(form))
+        # new_object.processForm(metadata=1, values=values)
         transaction.commit()

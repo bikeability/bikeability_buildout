@@ -13,8 +13,8 @@ var polyLineListener = null;
 var polyLineListenerMarker = null;
 var GOOD_COUNTER = 0;
 var BAD_COUNTER = 0;
-var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','G&oslash;nne omgivelser']];
-var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;'],['udsigt','Udsigt'],['groent','Ge&oslash;nne omgivelser']];
+var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','G&oslash;nne omgivelser'], ['belaeg','Bel&aelig;ning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
+var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;'],['udsigt','Udsigt'],['groent','Ge&oslash;nne omgivelser'], ['belaeg','Bel&aelig;ning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
 
 var GOOD_markers = [];
 var BAD_markers = [];
@@ -635,7 +635,8 @@ function placeGoodMarker(location) {
 		var marker = new google.maps.Marker({
 			position: location,
 			map: map,
-			icon :"green_icon.png"
+			icon :"green_icon.png",
+			draggable : true
 		});
 
 		var curr_id = GOOD_COUNTER;
@@ -669,14 +670,23 @@ function placeGoodMarker(location) {
 					marker.set("text", jq("#tgood" + curr_id).val());
 					marker.set("group",jq("#s" + curr_id).val());
 				});
+				
+				
+				
 			});
 		});
 		GOOD_COUNTER = GOOD_COUNTER + 1;
 		
-		jq("#good-coord" + curr_id).val(location.lat() + "," + location.lng())
+		jq("#good-coord" + curr_id).val(location.lat() + "," + location.lng());
+		
+		google.maps.event.addListener(marker, "dragend", function(event) {
+			var lctn = marker.getPosition()
+			jq("#good-coord" + curr_id).val(lctn.lat() + "," + lctn.lng());
+			saveData();
+		});
 		
 		GOOD_markers.push(marker);
-
+		saveData();
 	}
 }
 
@@ -691,7 +701,8 @@ function placeBadMarker(location) {
 		var marker = new google.maps.Marker({
 			position: location,
 			map: map,
-			icon :"red_icon.png"
+			icon :"red_icon.png",
+			draggable : true
 		});
 
 		var curr_id = BAD_COUNTER;
@@ -732,7 +743,15 @@ function placeBadMarker(location) {
 		
 		jq("#bad-coord" + curr_id).val(location.lat() + "," + location.lng())
 		
+		google.maps.event.addListener(marker, "dragend", function(event) {
+			var lctn = marker.getPosition()
+			jq("#bad-coord" + curr_id).val(lctn.lat() + "," + lctn.lng());
+			saveData();
+		});
+		
+		
 		BAD_markers.push(marker);
+		saveData();
 
 	} else {
 		alert("Du kan ikke beskrive flere end 3 oplevelser.");
@@ -741,7 +760,7 @@ function placeBadMarker(location) {
 
 function saveData() {
 	var serialized = jq("#mainform").serialize();
-	var URL = PORTAL_URL + "dlg1_save?" + serialized + "&respondentid=" + RESPONDENTID;
+	var URL = PORTAL_URL + "dlg1_save?" + serialized; // + "&respondentid=" + RESPONDENTID;
 	jq.ajax({
 		url: URL,
 		context: document.body,
@@ -770,6 +789,20 @@ function initMeasurementView() {
 			icon :"green_icon.png"
 		});
 		tb = goods[g]['drop'] + "<br/>" + goods[g]['text'];
+		var iw = new google.maps.InfoWindow({content : tb});
+		iw.open(map, marker);
+		
+	}
+	
+	var bads = DATA['bad_markers'];
+	
+	for (var g=0; g<bads.length; g++) {
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(bads[g]['coord'][0], bads[g]['coord'][1]),
+			map: map,
+			icon :"red_icon.png"
+		});
+		tb = bads[g]['drop'] + "<br/>" + bads[g]['text'];
 		var iw = new google.maps.InfoWindow({content : tb});
 		iw.open(map, marker);
 		

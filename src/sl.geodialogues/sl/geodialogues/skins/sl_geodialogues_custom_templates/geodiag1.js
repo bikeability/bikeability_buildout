@@ -808,4 +808,18 @@ function initMeasurementView() {
 		
 	}
 	
+	var polyOptions = {strokeColor: "#3355FF", strokeOpacity: 0.8, strokeWeight: 4 };
+	
+	var poly = new google.maps.Polyline(polyOptions);
+	poly.setMap(map);
+	
+	
+	var pl = DATA['polyline'];
+	var path = poly.getPath();
+	
+	for (var p=0; p<pl.length; p++) {
+		var pos = new google.maps.LatLng(pl[p][0],pl[p][1]);
+		path.push(pos);	
+	}
+	
 }

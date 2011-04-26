@@ -191,7 +191,7 @@ function deactivateMarkerListeners() {
 		google.maps.event.removeListener(markerListeners[m]);
 	}
 	*/
-	markerListeners = [];
+	// markerListeners = [];
 	
 	for (var m = 0; m < markers.length; m++) {
 		google.maps.event.clearListeners(markers[m]);
@@ -212,7 +212,7 @@ function deactivateMarkerListeners() {
 				placeBadMarker(event.latLng);
 			}
 		});
-		markerListeners.push(marker_listener);
+		//markerListeners.push(marker_listener);
 	}
 }
 
@@ -222,7 +222,7 @@ function deactivateVMarkerListeners() {
 		google.maps.event.removeListener(markerListeners[m]);
 	}
 	*/
-	vMarkerListeners = [];
+	//vMarkerListeners = [];
 	
 	for (var m = 0; m < vmarkers.length; m++) {
 		google.maps.event.clearListeners(vmarkers[m]);
@@ -243,7 +243,7 @@ function deactivateVMarkerListeners() {
 				placeBadMarker(event.latLng);
 			}
 		});
-		vMarkerListeners.push(marker_listener);
+		//vMarkerListeners.push(marker_listener);
 	}
 }
 
@@ -371,6 +371,7 @@ function createVMarker(point) {
 			}
 
 			if (STATE==3) {
+				alert("S=3");
 				placeBadMarker(event.latLng);
 			}
 	});
@@ -519,22 +520,25 @@ function deactivateOne() {
 
 function activateTwo() {
 	
-	for (var v=0;v<vmarkers.length;v++) {
-		var mm = vmarkers[v];
-		google.maps.event.addListener(mm, 'click', function(event) {
-			placeGoodMarker(event.latLng);
-		});
-	}
 	
 	if (STATE==1) {
 		nextState = 2;
 		deactivateOne();
 	}
 	if (STATE==3) {
+		nextState = 2;
 		deactivateThree();
 	}
 
 	STATE=2;
+	
+	/*for (var v=0;v<vmarkers.length;v++) {
+		var mm = vmarkers[v];
+		google.maps.event.addListener(mm, 'click', function(event) {
+			placeGoodMarker(event.latLng);
+		});
+	}*/
+	
 	jq("#wrapper-2").css("background-color","#FF0000");
 	jq("#button-2").unbind();
 	
@@ -610,6 +614,7 @@ function deactivateThree() {
 
 	google.maps.event.removeListener(BAD_listener);
 	deactivateMarkerListeners();
+	deactivateVMarkerListeners();
 
 	jq("#wrapper-3").css("background-color","lightgrey");
 

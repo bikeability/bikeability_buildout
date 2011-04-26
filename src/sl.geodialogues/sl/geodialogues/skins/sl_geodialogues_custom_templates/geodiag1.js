@@ -21,8 +21,10 @@ var BAD_markers = [];
 
 var GOOD_listener = null;
 var BAD_listener = null;
-var markerListeners = []
-var markerMarkerListeners = []
+var markerListeners = [];
+var vMarkerListeners = [];
+
+var markerMarkerListeners = [];
 
 var singlequote = "'";
 
@@ -184,26 +186,67 @@ function createMarker(point) {
 };
 
 function deactivateMarkerListeners() {
+	/*
 	for (var m = 0; m < markerListeners.length; m++) {
 		google.maps.event.removeListener(markerListeners[m]);
 	}
-
+	*/
+	markerListeners = [];
+	
+	for (var m = 0; m < markers.length; m++) {
+		google.maps.event.clearListeners(markers[m]);
+	}
+	
 	for (var m=0; m<markers.length; m++) {
 
 		var mm = markers[m];
 		var marker_listener = google.maps.event.addListener(mm, "click", function(event) {
 
 			if (nextState==2) {
+				// alert("ns=2");
 				placeGoodMarker(event.latLng);
 			}
 
 			if (nextState==3) {
+				// alert("ns=3");
 				placeBadMarker(event.latLng);
 			}
 		});
-		markerMarkerListeners.push(marker_listener);
+		markerListeners.push(marker_listener);
 	}
 }
+
+function deactivateVMarkerListeners() {
+	/*
+	for (var m = 0; m < markerListeners.length; m++) {
+		google.maps.event.removeListener(markerListeners[m]);
+	}
+	*/
+	vMarkerListeners = [];
+	
+	for (var m = 0; m < vmarkers.length; m++) {
+		google.maps.event.clearListeners(vmarkers[m]);
+	}
+	
+	for (var m=0; m<vmarkers.length; m++) {
+
+		var mm = vmarkers[m];
+		var marker_listener = google.maps.event.addListener(mm, "click", function(event) {
+
+			if (nextState==2) {
+				// alert("vns=2");
+				placeGoodMarker(event.latLng);
+			}
+
+			if (nextState==3) {
+				// alert("vns=3");
+				placeBadMarker(event.latLng);
+			}
+		});
+		vMarkerListeners.push(marker_listener);
+	}
+}
+
 
 function reactivateMarkerListeners() {
 
@@ -214,7 +257,7 @@ function reactivateMarkerListeners() {
 	markerMarkerListeners = [];
 	markerListeners = [];
 
-	for (var n = 0; n < markers.length; n++) {
+	/*for (var n = 0; n < markers.length; n++) {
 
 		var marker = markers[n];
 
@@ -231,7 +274,7 @@ function reactivateMarkerListeners() {
 			m = null;
 		});
 		markerListeners.push(marker_listener);
-	}
+	}*/
 }
 
 function createVMarker(point) {
@@ -320,6 +363,18 @@ function createVMarker(point) {
 			}
 		}
 	});
+	
+	var marker_listener = google.maps.event.addListener(marker, "click", function() {
+			if (STATE==2) {
+				// alert(x);
+				placeGoodMarker(event.latLng);
+			}
+
+			if (STATE==3) {
+				placeBadMarker(event.latLng);
+			}
+	});
+	vMarkerListeners.push(marker_listener);
 	return marker;
 };
 
@@ -452,6 +507,7 @@ function deactivateOne() {
 	jq("#b1").css("background-image",'url(dot-grey.png)');
 
 	deactivateMarkerListeners();
+	deactivateVMarkerListeners();
 
 	jq("#button-1").bind("click", function() {
 		jq("#button-1").unbind();
@@ -501,6 +557,9 @@ function deactivateTwo() {
 
 	google.maps.event.removeListener(GOOD_listener);
 	google.maps.event.removeListener(polyLineListenerMarker);
+	
+	deactivateMarkerListeners();
+	deactivateVMarkerListeners();
 
 	jq("#wrapper-2").css("background-color","lightgrey");
 
@@ -519,21 +578,30 @@ function deactivateTwo() {
 }
 
 function activateThree() {
-	for (var v=0;v<vmarkers.length;v++) {
-		google.maps.event.addListener(vmarkers[v],'click', function(event) {
-			placeGoodMarker(event.latLng);
-		});
-	}
+	
 	if (STATE==2) {
+		nextState=3;
 		deactivateTwo();
 	}
 	if (STATE==1) {
 		nextState=3;
 		deactivateOne();
 	}
+	
 	STATE = 3;
+	/*for (var v=0;v<vmarkers.length;v++) {
+		google.maps.event.addListener(vmarkers[v],'click', function(event) {
+			placeBadMarker(event.latLng);
+		});
+	}*/
+	
 	jq("#wrapper-3").css("background-color","#FF0000");
 	jq("#instruction3").css("color","black");
+	
+	polyLineListenerMarker =  google.maps.event.addListener(polyLine, 'click', function(event) {
+		placeBadMarker(event.latLng);
+	});
+	
 	placeBadMarkers();
 	jq("#ba3").hide();
 }
@@ -541,6 +609,7 @@ function activateThree() {
 function deactivateThree() {
 
 	google.maps.event.removeListener(BAD_listener);
+	deactivateMarkerListeners();
 
 	jq("#wrapper-3").css("background-color","lightgrey");
 

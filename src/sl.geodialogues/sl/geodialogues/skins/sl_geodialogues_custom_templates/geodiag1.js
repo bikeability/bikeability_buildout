@@ -13,8 +13,8 @@ var polyLineListener = null;
 var polyLineListenerMarker = null;
 var GOOD_COUNTER = 0;
 var BAD_COUNTER = 0;
-var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','G&oslash;nne omgivelser'], ['belaeg','Bel&aelig;ning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
-var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;'],['udsigt','Udsigt'],['groent','Ge&oslash;nne omgivelser'], ['belaeg','Bel&aelig;ning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
+var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
+var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
 
 var GOOD_markers = [];
 var BAD_markers = [];

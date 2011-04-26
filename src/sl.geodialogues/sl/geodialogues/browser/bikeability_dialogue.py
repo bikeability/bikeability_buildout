@@ -3,6 +3,8 @@ from plone.memoize.view import memoize
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.app.component.hooks import getSite
 import transaction
+from DateTime import DateTime
+from random import random
 
 class BikeabilityDialogue1(BrowserView):
     """
@@ -50,7 +52,22 @@ class BikeabilityDialogue1Save(BrowserView):
             new_object = getSite()[respondentid]
         else:
             print "New object"
-            objid = site.invokeFactory("Measurement", respondentid)
+            if respondentid !="NULL":
+                objid = site.invokeFactory("Measurement", respondentid)
+                
+            else:
+                now=DateTime()
+                time='%s.%s' % (now.strftime('%Y-%m-%d'), str(now.millis())[7:])
+                rand=str(random())[2:6]
+                prefix=''
+                suffix=''
+
+                prefix ="Measurement."
+                prefix=prefix.lower()
+
+                id = prefix+time+rand+suffix
+                objid = site.invokeFactory("Measurement", id)
+                
             new_object = site[objid]
         
         new_object.processForm(metadata=1, values=values)

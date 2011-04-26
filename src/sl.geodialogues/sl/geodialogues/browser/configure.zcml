@@ -41,6 +41,14 @@
 		class=".bikeability_dialogue.BikeabilityDialogue1"
 		layer=".interfaces.IThemeSpecific"
 		/>
+		
+    <browser:page
+		for="*"
+		name="measurement_view"
+		permission="zope2.View"
+		class=".measurement_view.MeasurementView"
+		layer=".interfaces.IThemeSpecific"
+		/>
 
     <browser:page
 		for="*"

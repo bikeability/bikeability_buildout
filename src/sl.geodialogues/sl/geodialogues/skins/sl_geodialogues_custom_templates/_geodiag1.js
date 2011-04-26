@@ -101,11 +101,13 @@ var g = null;
 							markers.splice(m, 1);
 							polyLine.getPath().removeAt(m);
 							removeVMarkers(m);
+							updatePolyLineField();
 							break;
 						}
 					}
 					m = null;
 				});
+				updatePolyLineField();
 				return marker;
 			};
 			
@@ -217,6 +219,7 @@ function moveVMarker(index) {
 				}
 				newpos = null;
 				index = null;
+				updatePolyLineField();
 			};
 			
 	function removeVMarkers(index) {
@@ -244,6 +247,9 @@ function moveVMarker(index) {
 // ==================
 
  
+function updatePolyLineField() {
+	jq(##)
+}
  
  
 

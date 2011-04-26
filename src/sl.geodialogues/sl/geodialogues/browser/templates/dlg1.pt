@@ -31,7 +31,7 @@ i18n:domain="sl.bikeability">
 						
 						<div id="map">
 						</div>
-						<form>
+						<form name="mainform" id="mainform">
 						
 						<div id="button-wrapper">
 							<!-- button 1 starts here -->
@@ -43,10 +43,12 @@ i18n:domain="sl.bikeability">
 										1. TEGN DIN RUTE
 									</div>
 								</div>
-								<div class="instruction" id="polyline-instruction">
-									Klik p&aring; kortet og tegn din rute. Afslut ved at dobbeltklikke.
+								<div id="ba1" class="button-activate">Klik her for at forts&aelig;tte med at tegne din rute</div>
+								<div class="instruction" id="instruction1">
+									Klik p&aring; kortet og tegn din rute.
 									Du kan tilfoslash;je punkter p&aring; et linjesegment ved at klikke p&aring firkantet i dets midte. 
-									Klik <a>her</a> for at starte forfra. 
+									Tr&aelig;k og slip p&aring; firkanterne for at tilpasse ruten. 
+									Klik <a onclick="redrawRoute()">her</a> for at starte forfra. 
 								</div>
 								
 							</div>
@@ -60,29 +62,21 @@ i18n:domain="sl.bikeability">
 											2. GODE OPLEVELSER
 										</div>
 									</div>
-									<div class="instruction" id="good-instruction">
-										Klik p&aring; kortet hvor du har haft en god oplevelse. 
-										Beskriv oplevelsen i boblen som vises efter du har klikket p&aring; kortet.. 
-									</div>
-									<div id="injector-area-2">
-										
+									<div id="ba2" class="button-activate">Klik her for at tilf&oslash;je steder med gode oplevelser</div>
+									
+									<div class="instruction" id="instruction2">
+										Marker de 3 steder hvor du havde d&aring;rlige oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
+										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en d&aring;rlige oplevelse. 
 									</div>
 								
-							<!--	<div style="clear:both;">
-							</div>-->
+
 							</div>
-							
-							
-							
+														
 							<!-- button 2 ends here -->
-							<!--
-							<div style="clear:both;">
-							</div>
-							-->
+
 							<!-- button 3 starts here -->
 							
 							<div id="button-3" class="button">
-								
 								
 								<div>
 								
@@ -91,61 +85,49 @@ i18n:domain="sl.bikeability">
 											3. D&Aring;RLIGE OPLEVELSER
 										</div>
 									</div>
-									<div id="injector-area-3">
-										
+									<div id="ba3" class="button-activate">Klik her for at tilf&oslash;je steder med d&aring;rlige oplevelser</div>
+									<div class="instruction" id="instruction3">
+										Marker de 3 steder hvor du havde d&aring;rlige oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
+										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en d&aring;rlige oplevelse. 
 									</div>
 								</div>
 								
 								<div style="clear:both;">
 								</div>
 							</div>
-							
-							<!--button 3 ends here -->
-							
-							<div style="clear:both;">
-							</div>
-							
-							
-							
-							<!--
-							<div id="button-4" class="button">
-								<div id="b4" class="button-point">
-									4
-								</div>
-								<div id="wrapper-4" class="b-wrapper">
-									<div class="button-text" id="text4">
-										GEM & LUK VINDUE
-									</div>
-								</div>
-								<div style="clear:both;">
-								</div>
-							</div>
-							<div style="clear:both;">
-							</div>
-							
-						</div>-->
+	
+
 						<div style="clear:both;">
 						</div>
-					</form>
-					<input name="good-text0" id="good-text0" />
-					<input name="good-text1" id="good-text1" />
-					<input name="good-text2" id="good-text2" />
 					<input name="good-drop0" id="good-drop0" />
+					<input name="good-text0" id="good-text0" />
+					<input name="good-coord0" id="good-coord0" />
+					<br/>
 					<input name="good-drop1" id="good-drop1" />
+					<input name="good-text1" id="good-text1" />
+					<input name="good-coord1" id="good-coord1" />
+					<br/>
 					<input name="good-drop2" id="good-drop2" />
-					<input name="bad-text0" id="bad-text0" />
-					<input name="bad-text1" id="bad-text1" />
-					<input name="bad-text2" id="bad-text2" />
+					<input name="good-text2" id="good-text2" />
+					<input name="good-coord2" id="good-coord2" />
+					<br/>
 					<input name="bad-drop0" id="bad-drop0" />
+					<input name="bad-text0" id="bad-text0" />
+					<input name="bad-coord0" id="bad-coord0" />
+					<br/>
 					<input name="bad-drop1" id="bad-drop1" />
+					<input name="bad-text1" id="bad-text1" />
+					<input name="bad-coord1" id="bad-coord1" />
+					<br/>
 					<input name="bad-drop2" id="bad-drop2" />
-					
+					<input name="bad-text2" id="bad-text2" />
+					<input name="bad-coord2" id="bad-coord2" />
+					<br/>
+					<input name="polyline" id="polyline" />
+
+					</form>
 					</div>
 					
-					<div id="no-marker-set">
-						Du har ikke endnu markeret stedet p&aring; kortet.
-						Klik p&aring; kortet for at markere oplevelsesstedet.
-					</div>
 					
 					<script type="text/javascript">
 						$(document).ready( function() {

@@ -1,36 +1,46 @@
+// view-source:http://www.ekelschot.eu/demo/maps/enableEditing.html
+
 var map = null;
 var polyLine;
 var tmpPolyLine;
 var markers = [];
 var vmarkers = [];
+
 var STATE = 1;
+
+
 var polyLineListener = null;
+var polyLineListenerMarker = null;
 var GOOD_COUNTER = 0;
 var BAD_COUNTER = 0;
-var GOOD_GROUP_VALUES = [['0','Vaelg gruppe'],['sikker','God sikkerhed'],['stoej','Ikke for meget stoej'],['v3','Value 3']];
-var BAD_GROUP_VALUES = [['0','Vaelg gruppe'], ['usikker','Daarlig sikkerhed'],['stoej','Meget stoej'],['v3','Value 3']];
+var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','G&oslash;nne omgivelser']];
+var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;'],['udsigt','Udsigt'],['groent','Ge&oslash;nne omgivelser']];
+
 var GOOD_markers = [];
 var BAD_markers = [];
 
-
-var markers = [];
+var GOOD_listener = null;
+var BAD_listener = null;
+var markerListeners = []
+var markerMarkerListeners = []
 
 var singlequote = "'";
 
+var appStart = true;
 
 function initMap(mapHolder) {
 	markers = [];
 	vmarkers = [];
 	var mapOptions = {
-		zoom: 7,
-		center: new google.maps.LatLng(52.092, 5.121),
+		zoom: 13,
+		center: new google.maps.LatLng(55.684166, 12.544606),
 		mapTypeId: google.maps.MapTypeId.HYBRID,
 		draggableCursor: 'auto',
 		draggingCursor: 'move',
 		disableDoubleClickZoom: true
 	};
 	map = new google.maps.Map(document.getElementById(mapHolder), mapOptions);
-	polyLineListener = google.maps.event.addListener(map, "click", mapLeftClick);
+	// polyLineListener = google.maps.event.addListener(map, "click", mapLeftClick);
 	mapHolder = null;
 	mapOptions = null;
 };
@@ -50,9 +60,7 @@ function initPolyline() {
 	polyLine.setMap(map);
 	tmpPolyLine = new google.maps.Polyline(tmpPolyOptions);
 	tmpPolyLine.setMap(map);
-	
-	
-	
+
 };
 
 function polyClick(event) {
@@ -71,9 +79,57 @@ function mapLeftClick(event) {
 		var path = polyLine.getPath();
 		path.push(event.latLng);
 		marker = null;
+		updatePolyLineField();
 	}
 	event = null;
 };
+
+function redrawPolyline() {
+	var backupPoly = polyLine;
+	var markersBackup = [];
+
+	polyLine.setMap(null);
+
+	for (var m=0;m<markers.length;m++) {
+		var ma = markers[m];
+		markersBackup.push(ma);
+		ma.setMap(null);
+
+	}
+	for (var m=0;m<vmarkers.length;m++) {
+		vmarkers[m].setMap(null);
+	}
+
+	markers = [];
+	vmarkers = [];
+
+	polyLine.setMap(null);
+	polyLine = null;
+	tmpPolyLine.setMap(null);
+	tmpPolyLine = null;
+
+	initPolyline();
+
+	for (var m=0; m<markersBackup.length; m++) {
+		var pos = markersBackup[m].getPosition();
+
+		var marker = createMarker(pos);
+		markers.push(marker);
+		
+		if (markers.length != 1) {
+ 			var vmarker = createVMarker(pos);
+ 			vmarkers.push(vmarker);
+ 			vmarker = null;
+ 		}
+ 		
+		var path = polyLine.getPath();
+
+		path.push(pos);
+		marker = null;
+		updatePolyLineField();
+	
+	}
+}
 
 function createMarker(point) {
 	var imageNormal = new google.maps.MarkerImage(
@@ -110,20 +166,74 @@ function createMarker(point) {
 		}
 		m = null;
 	});
-	google.maps.event.addListener(marker, "click", function() {
+	var marker_listener = google.maps.event.addListener(marker, "click", function() {
 		for (var m = 0; m < markers.length; m++) {
 			if (markers[m] == marker) {
 				marker.setMap(null);
 				markers.splice(m, 1);
 				polyLine.getPath().removeAt(m);
 				removeVMarkers(m);
+				updatePolyLineField
 				break;
 			}
 		}
 		m = null;
 	});
+	markerListeners.push(marker_listener);
 	return marker;
 };
+
+function deactivateMarkerListeners() {
+	for (var m = 0; m < markerListeners.length; m++) {
+		google.maps.event.removeListener(markerListeners[m]);
+	}
+
+	for (var m=0; m<markers.length; m++) {
+
+		var mm = markers[m];
+		var marker_listener = google.maps.event.addListener(mm, "click", function(event) {
+
+			if (nextState==2) {
+				placeGoodMarker(event.latLng);
+			}
+
+			if (nextState==3) {
+				placeBadMarker(event.latLng);
+			}
+		});
+		markerMarkerListeners.push(marker_listener);
+	}
+}
+
+function reactivateMarkerListeners() {
+
+	for (var m=0; m<markerMarkerListeners.length;m++) {
+		google.maps.event.removeListener(markerMarkerListeners[m])
+	}
+
+	markerMarkerListeners = [];
+	markerListeners = [];
+
+	for (var n = 0; n < markers.length; n++) {
+
+		var marker = markers[n];
+
+		var marker_listener = google.maps.event.addListener(marker, "click", function() {
+			for (var m = 0; m < markers.length; m++) {
+				if (markers[m] == marker) {
+					marker.setMap(null);
+					markers.splice(m, 1);
+					polyLine.getPath().removeAt(m);
+					removeVMarkers(m);
+					break;
+				}
+			}
+			m = null;
+		});
+		markerListeners.push(marker_listener);
+	}
+}
+
 function createVMarker(point) {
 	var prevpoint = markers[markers.length-2].getPosition();
 	var imageNormal = new google.maps.MarkerImage(
@@ -205,6 +315,7 @@ function createVMarker(point) {
 				secondVPos = null;
 				newVMarker = null;
 				newMarker = null;
+				updatePolyLineField();
 				break;
 			}
 		}
@@ -256,153 +367,224 @@ function removeVMarkers(index) {
 	}
 	index = null;
 };
-//---------------------------------------------------------------------------------------
-// here the button functions
 
+//---------------------------------------------------------------------------------------
+
+/*
+ * updates the hidden field, which contains the data for the polyline
+ */
+function updatePolyLineField() {
+	path = polyLine.getPath();
+	var nodes = "";
+	for (var x=0;x<path.getLength();x++) {
+		var node =  path.getAt(x);
+		nodes = nodes + node.lat() + "," + node.lng() + ";";
+	}
+	jq("#polyline").val(nodes);
+	saveData();
+}
 
 function initializeButtons() {
-	
-	// jq("instruction").hide();
- 	
-	jq("button").button({ icons: {primary:'ui-icon-circle-check'},text: false });
- 	
- 	jq("#button-1").bind("click", function() {
- 		
- 		jq("#button-1").unbind();
- 		jq("#b1-ok").bind("click", function() {
- 			// alert("ok clicked");
- 			jq("#text1").css("background-color","grey");	
- 		});
- 	});
- 	
- 	
- 	jq("#button-2").bind("click", function() {
- 		jq("#button-2").unbind();
- 		activateTwo();
- 		
- 				
- 	});
 
- 	jq("#button-3").bind("click", function() {
- 		jq("#button-3").unbind();
-	 	activateThree();
+	// jq("instruction").hide();
+
+	// jq("button").button({ icons: {primary:'ui-icon-circle-check'},text: false });
+
+	jq("#button-1").bind("click", function() {
+		jq("#button-1").unbind();
+		activateOne();
 	});
+	jq("#button-2").bind("click", function() {
+		jq("#button-2").unbind();
+		activateTwo();
+
+	});
+	jq("#button-3").bind("click", function() {
+		jq("#button-3").unbind();
+		activateThree();
+	});
+	activateOne();
+	
+	jq("#ba1").button();
+	jq("#ba2").button();
+	jq("#ba3").button();
+	
+	jq("instruction2").hide();
+	jq("instruction3").hide();
+	jq("ba1").hide();
+
 }
 
 function activateOne() {
 	if (STATE==2) {
 		deactivateTwo();
 	}
-	
+
 	if (STATE==3) {
 		deactivateThree();
 	}
-	
-	polyLineListener = google.maps.event.addListener(map, "click", mapLeftClick);
-	
-	STATE=1;
-	
-	jq("#wrapper-1").css("background-color","red");
 
-} 
- 
-function deactivateOne() {
-	google.maps.event.clearListeners(map,"click");
-	//GEvent.clearListeners(poly, "endline");
-	//poly.disableEditing();
-	jq("#wrapper-1").css("background-color","grey");	
-	jq("#b1").css("background-image",'url(dot-grey.png)');
+	polyLineListener = google.maps.event.addListener(map, "click", mapLeftClick);
+
+	STATE=1;
+
+	jq("#instruction1").show();
+
+	jq("#wrapper-1").css("background-color","red");
+	if (appStart) {
+		appStart = false;
+	} else {
+		// reactivateMarkerListeners();
+		redrawPolyline();
+	}
+	jq("#instruction1").css("color","black");
+	jq("#ba1").hide();
 }
- 
+
+function deactivateOne() {
+	google.maps.event.removeListener(polyLineListener);
+	polyLineListener = null;
+	
+	google.maps.event.clearInstanceListeners(map);
+	
+
+	jq("#wrapper-1").css("background-color","lightgrey");
+	jq("#b1").css("background-image",'url(dot-grey.png)');
+
+	deactivateMarkerListeners();
+
+	jq("#button-1").bind("click", function() {
+		jq("#button-1").unbind();
+		activateOne();
+	});
+	jq("#instruction1").css("color","lightgray");
+	jq("#ba1").show();
+}
+
 function activateTwo() {
+	
+	for (var v=0;v<vmarkers.length;v++) {
+		var mm = vmarkers[v];
+		google.maps.event.addListener(mm, 'click', function(event) {
+			placeGoodMarker(event.latLng);
+		});
+	}
+	
 	if (STATE==1) {
+		nextState = 2;
 		deactivateOne();
 	}
 	if (STATE==3) {
 		deactivateThree();
 	}
+
 	STATE=2;
 	jq("#wrapper-2").css("background-color","#FF0000");
 	jq("#button-2").unbind();
- 	// showGoodHtmlInstructionText("#injector-area-2"); 
- 	saveData();
- 	google.maps.event.addListener(polyLine, "click", function(event) {
- 		placeGoodMarker(event.latLng);
- 	});
+	
+	jq("#ba2").hide();
+	if (GOOD_markers >2) {
+		
+	} 
+	jq("instruction2").show();
+
+	polyLineListenerMarker =  google.maps.event.addListener(polyLine, 'click', function(event) {
+		placeGoodMarker(event.latLng);
+	});
+	
 	placeGoodMarkers();
+	jq("#instruction2").css("color","black");
+
 }
- 
- 
+
 function deactivateTwo() {
-	try {
-		google.maps.clearListeners(map, "click");
-		google.maps.clearListeners(polyLine, "click");
-	} catch(err) {
+
+	google.maps.event.removeListener(GOOD_listener);
+	google.maps.event.removeListener(polyLineListenerMarker);
+
+	jq("#wrapper-2").css("background-color","lightgrey");
+
+	jq("#button-2").bind("click", function() {
+		jq("#button-2").unbind();
+		activateTwo();
+	});
+
+	if (GOOD_markers.length==3) {
+		jq("ba2").show("Rediger gode steder");
 	}
-	jq("#wrapper-2").css("background-color","grey");	
+	
+	jq("#ba2").show();
+	jq("#instruction2").css("color","lightgray");
 	
 }
 
 function activateThree() {
+	for (var v=0;v<vmarkers.length;v++) {
+		google.maps.event.addListener(vmarkers[v],'click', function(event) {
+			placeGoodMarker(event.latLng);
+		});
+	}
 	if (STATE==2) {
-		deactivateTwo();	
+		deactivateTwo();
 	}
 	if (STATE==1) {
+		nextState=3;
 		deactivateOne();
 	}
 	STATE = 3;
 	jq("#wrapper-3").css("background-color","#FF0000");
+	jq("#instruction3").css("color","black");
 	placeBadMarkers();
+	jq("#ba3").hide();
 }
 
 function deactivateThree() {
-	try {
-		google.maps.clearListeners(map, "click");
-		google.maps.clearListeners(polyLine, "click");
-	} catch(err) {
-	}
-	jq("#wrapper-3").css("background-color","grey");
-} 
 
-function showGoodHtmlInstructionText(node) {
-	
+	google.maps.event.removeListener(BAD_listener);
+
+	jq("#wrapper-3").css("background-color","lightgrey");
+
+	jq("#button-3").bind("click", function() {
+		jq("#button-3").unbind();
+		activateThree();
+	});
+	jq("#instruction3").css("color","lightgray");
+	jq("#ba3").show();
 }
 
 /*
  * placeGoodMarkers()
- * 
+ *
  * Switches on the place marker functionality by setting a click event on the map
  */
- 
+
 function placeGoodMarkers() {
-	google.maps.event.addListener(map, 'click', function(event) {
-    	 placeGoodMarker(event.latLng);
-  });
+	GOOD_listener = google.maps.event.addListener(map, 'click', function(event) {
+		placeGoodMarker(event.latLng);
+	});
 }
 
 /*
  * placeBadMarkers()
- * 
+ *
  * Switches on the place marker functionality by setting a click event on the map
  */
- 
+
 function placeBadMarkers() {
-	google.maps.event.addListener(map, 'click', function(event) {
+	BAD_listener = google.maps.event.addListener(map, 'click', function(event) {
 		placeBadMarker(event.latLng);
-  });
+	});
 }
 
-
-
 function createDropdown(id, type_) {
-	alert("cD" + type_);
+	// alert("cD" + type_);
 	if (type_=="good") {
 		var GROUP_VALUES = GOOD_GROUP_VALUES;
 	} else {
-		alert("bad");
+		// alert("bad");
 		var GROUP_VALUES = BAD_GROUP_VALUES;
 	}
-	
+
 	var html = '<select id="s' + id + '" onchange="updateDropDown(' + singlequote + type_ + singlequote + ',' + id + ')">';
 	for (var i=0; i<GROUP_VALUES.length;i++) {
 		html = html + '<option value="' + GROUP_VALUES[i][0] + '">' + GROUP_VALUES[i][1] + '</option>';
@@ -420,7 +602,7 @@ function createDropdownSelected(id, type, s) {
 	var html = '<select id="s' + id + '" onchange="updateDropDown(' + singlequote + type + singlequote + ',' + id + ')">';
 	for (var i=0; i<GROUP_VALUES.length;i++) {
 		if (s==GROUP_VALUES[i][0]) {
-			html = html + '<option value="' + GROUP_VALUES[i][0] + '" selected="selected"' + GROUP_VALUES[i][1] + '</option>';
+			html = html + '<option value="' + GROUP_VALUES[i][0] + '" selected="selected">' + GROUP_VALUES[i][1] + '</option>';
 		} else {
 			html = html + '<option value="' + GROUP_VALUES[i][0] + '">' + GROUP_VALUES[i][1] + '</option>';
 		}
@@ -432,18 +614,19 @@ function createDropdownSelected(id, type, s) {
 function updateText(type, id) {
 	var content = jq("#t" + type + id).val();
 	jq("#" + type + "-text" + id).val(content);
+	saveData();
+	
 }
-
 
 function updateDropDown(type,id) {
 	var content = jq("#s" + id).val();
 	jq("#" + type + "-drop" + id).val(content);
+	saveData();
 }
-
 
 /*
  * placeGoodMarker() places a good marker and opens its bubble.
- * 
+ *
  */
 function placeGoodMarker(location) {
 
@@ -451,48 +634,55 @@ function placeGoodMarker(location) {
 
 		var marker = new google.maps.Marker({
 			position: location,
-			map: map
+			map: map,
+			icon :"green_icon.png"
 		});
-		
+
 		var curr_id = GOOD_COUNTER;
-		
+
 		marker.set("id", curr_id);
 		map.setCenter(location);
-		
-		
-		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="ta" id="t' + 'good' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
+
+		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="tgood' + curr_id + '" id="tgood' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
 		curr_id + ');"></textarea><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
 
 		google.maps.event.addListener(iw1, "closeclick", function(event) {
-			marker.set("text", jq("#ta" + curr_id).val());
+			marker.set("text", jq("#tgood" + curr_id).val());
 			marker.set("group",jq("#s" + curr_id).val());
 			marker.set("type", "good");
-		});
-		google.maps.event.addListener(marker, "click", function() {
-			var v = marker.get("id");
-			var g = marker.get("group");
-			var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'good', g) + '<br/><textarea name="ta" id="ta' + v + '">' + marker.get("text")  + '</textarea><form> ok';
-			var iw = new google.maps.InfoWindow({content : tb});
-			iw .open(map, marker);
-			google.maps.event.addListener(iw, "closeclick", function(event) {
-				marker.set("text", jq("#ta" + curr_id).val());
-				marker.set("group",jq("#s" + curr_id).val());
+
+			google.maps.event.addListener(marker, "click", function(event) {
+				var v = marker.get("id");
+				var g = marker.get("group");
+				var mtext = marker.get("text");
+				if (mtext == undefined) {
+					mtext="";
+				}
+				var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'good', g) + '<br/><textarea name="tgood' + v + '" id="tgood' + v + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' + 
+										 curr_id + ');">' + mtext  + '</textarea><form>';
+				var iw = new google.maps.InfoWindow({content : tb});
+				iw.open(map, marker);
+				google.maps.event.addListener(iw, "closeclick", function(event) {
+					marker.set("text", jq("#tgood" + curr_id).val());
+					marker.set("group",jq("#s" + curr_id).val());
+				});
 			});
 		});
-		
 		GOOD_COUNTER = GOOD_COUNTER + 1;
-		GOOD_markers.push(marker);
 		
+		jq("#good-coord" + curr_id).val(location.lat() + "," + location.lng())
+		
+		GOOD_markers.push(marker);
 
 	}
 }
 
 /*
  * placeGoodMarker() places a good marker and opens its bubble.
- * 
+ *
  */
 function placeBadMarker(location) {
 
@@ -500,53 +690,89 @@ function placeBadMarker(location) {
 
 		var marker = new google.maps.Marker({
 			position: location,
-			map: map
+			map: map,
+			icon :"red_icon.png"
 		});
 
 		var curr_id = BAD_COUNTER;
 
-		
 		marker.set("id", curr_id);
 		map.setCenter(location);
-		
-		
-		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'bad') +'<br/><textarea name="ta" id="tbad' + curr_id + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
-		curr_id + ');"></textarea><form> <a onclick="">gem<a>';
 
-		// alert(iwc1);
+		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'bad') +'<br/><textarea name="tbad" id="tbad' + curr_id + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
+		curr_id + ');"></textarea><form>';
 
-		// var iwopts = new google.maps.InfoWindowOptions();
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
 
 		google.maps.event.addListener(iw1, "closeclick", function(event) {
-			marker.set("text", jq("#ta" + curr_id).val());
+			marker.set("text", jq("#tbad" + curr_id).val());
 			marker.set("group",jq("#s" + curr_id).val());
 			marker.set("type", 'bad');
-		});
-		google.maps.event.addListener(marker, "click", function() {
-			var v = marker.get("id");
-			var g = marker.get("group");
-			var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'bad', g) + '<br/><textarea name="ta" id="ta' + v + '">' + marker.get("text")  + '</textarea><form>';
-			var iw = new google.maps.InfoWindow({content : tb});
-			iw.open(map, marker);
-			google.maps.event.addListener(iw, "closeclick", function(event) {
-				marker.set("text", jq("#ta" + curr_id).val());
-				marker.set("group",jq("#s" + curr_id).val());
+			
+			google.maps.event.addListener(marker, "click", function() {
+				var v = marker.get("id");
+				var g = marker.get("group");
+				var mtext = marker.get("text");
+				if (mtext == undefined) {
+					mtext="";
+				}
+				var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'bad', g) + '<br/><textarea name="ta" id="tbad' + v + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
+										 curr_id + ');">' + mtext  + '</textarea><form>';
+				var iw = new google.maps.InfoWindow({content : tb});
+				iw.open(map, marker);
+				google.maps.event.addListener(iw, "closeclick", function(event) {
+					marker.set("text", jq("#tbad" + curr_id).val());
+					marker.set("group",jq("#s" + curr_id).val());
+
+				});
 			});
 		});
+		BAD_COUNTER = BAD_COUNTER + 1;
 		
-			BAD_COUNTER = BAD_COUNTER + 1;
-			BAD_markers.push(marker);
+		jq("#bad-coord" + curr_id).val(location.lat() + "," + location.lng())
+		
+		BAD_markers.push(marker);
 
 	} else {
-		alert("bad > 3");
+		alert("Du kan ikke beskrive flere end 3 oplevelser.");
 	}
 }
 
-
 function saveData() {
-	
+	var serialized = jq("#mainform").serialize();
+	var URL = PORTAL_URL + "dlg1_save?" + serialized + "&respondentid=" + RESPONDENTID;
+	jq.ajax({
+		url: URL,
+		context: document.body,
+		success: function() {
+			jq("#wheel").css("background-image",'');
+			// alert("saved");
+		}
+	});
 }
 
+function redrawRoute() {
 
+}
+
+//===================
+
+
+function initMeasurementView() {
+	
+	var goods = DATA['good_markers'];
+	
+	for (var g=0; g<goods.length; g++) {
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(goods[g]['coord'][0], goods[g]['coord'][1]),
+			map: map,
+			icon :"green_icon.png"
+		});
+		tb = goods[g]['drop'] + "<br/>" + goods[g]['text'];
+		var iw = new google.maps.InfoWindow({content : tb});
+		iw.open(map, marker);
+		
+	}
+	
+}

@@ -7,7 +7,9 @@
 
 /* Stylesheet for the 'GeoDialogues' Plone theme */
 
-
+body {
+	font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
+}
 
 h2 {
 	font-size: 20px;
@@ -23,6 +25,24 @@ h2 {
 	width:500px;
 	height:500px;
 }
+
+
+.button-activate {
+	cursor:pointer;
+	margin-top : 0.5em;
+}
+
+.instruction {
+	color : lightgray;
+	font-size: 1em;
+}
+
+#instruction1 a {
+	font-weight: bold;
+	cursor:pointer;
+}
+
+
 
 .b-wrapper {
 	/*float:left;*/

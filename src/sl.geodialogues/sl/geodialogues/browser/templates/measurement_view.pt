@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal"
+xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+lang="en"
+metal:use-macro="here/bikeability_main_template/macros/master"
+i18n:domain="sl.bikeability">
+
+	<head>
+		<metal:block metal:fill-slot="head_slot">
+			<!--<script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=ABQIAAAAdZy7KPNU5G-nLj85ppZWRRRPrglaROPTktcBxiTGweSIT8VhshRShbbhz13Zro0_5nF6BMYpBhkntg" type="text/javascript">
+		</script>-->
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		</metal:block>
+	</head>
+	<body>
+		<metal:block fill-slot="top_slot" tal:define="dummy python:request.set('disable_border',1)" />
+		<metal:main fill-slot="main">
+			<tal:main-macro metal:define-macro="main"
+							tal:define="request request|here/request|container/request|nothing;">
+			
+					<div id="headline">
+						<h2>
+							Measurement
+						</h2>	
+						
+						<div id="map">
+						</div>
+						
+					</div>
+					
+					<script type="text/javascript">
+						$(document).ready( function() {
+						var g = google.maps;
+						initMap('map');
+						initMeasurementView();
+						});
+					</script>
+					
+					<script type="text/javascript" tal:content="string:var PORTAL_URL='${here/portal_url}/';"></script>
+					<script type="text/javascript" tal:content="string:var DATA=${view/getCoordinateJS}"></script>
+					
+			</tal:main-macro>
+		</metal:main>
+	</body>
+</html>
+

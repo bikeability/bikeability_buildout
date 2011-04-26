@@ -560,6 +560,7 @@ function activateTwo() {
 function deactivateTwo() {
 
 	google.maps.event.removeListener(GOOD_listener);
+	
 	google.maps.event.removeListener(polyLineListenerMarker);
 	
 	deactivateMarkerListeners();
@@ -611,6 +612,8 @@ function activateThree() {
 }
 
 function deactivateThree() {
+
+	google.maps.event.removeListener(polyLineListenerMarker);
 
 	google.maps.event.removeListener(BAD_listener);
 	deactivateMarkerListeners();

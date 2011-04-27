@@ -23,7 +23,7 @@ h2 {
 #map {
 	float:left;
 	width:500px;
-	height:500px;
+	height:528px;
 }
 
 

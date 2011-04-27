@@ -468,6 +468,7 @@ function initializeButtons() {
 		jq("#button-3").unbind();
 		activateThree();
 	});
+	
 	activateOne();
 	
 	jq("#ba1").button();
@@ -477,6 +478,8 @@ function initializeButtons() {
 	jq("instruction2").hide();
 	jq("instruction3").hide();
 	jq("ba1").hide();
+	
+	jq("#instruction4").css("color", "grey");
 
 }
 

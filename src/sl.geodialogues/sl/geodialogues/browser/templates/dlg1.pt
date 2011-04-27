@@ -94,6 +94,20 @@ i18n:domain="sl.bikeability">
 										at angive &aring;rsagen til din oplevelse. V&aelig;lg fra menuen og tilf&oslash;j evt. en uddybende kommentar. 
 									</div>
 								</div>
+							</div>
+							<div id="button-4" class="button">
+								
+								<div>
+								
+									<div id="wrapper-4" class="b-wrapper">
+										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
+											4. AFSLUT
+										</div>
+									</div>
+									<div class="instruction" id="instruction4">
+										Du kan til enhver tid lukke vinduet. Dine data bliver l&oslash;bende gemt. 
+									</div>
+										
 								
 								<div style="clear:both;">
 								</div>

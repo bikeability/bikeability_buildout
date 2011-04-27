@@ -21,8 +21,13 @@ i18n:domain="sl.bikeability">
 				<div tal:define="respondentid request/respondentid|view/respondentid">
 					<div id="headline">
 						<h2>
-							BESKRIV DIN RUTE 
+							GODE OG D&Aring;RLIGE OPLEVELSER P&Aring; CYKELTUREN
 						</h2>
+						<h3>
+							Dette er en pilottest. Valgmuligheder p&aring; oplevelser er sl&aring;et fra.
+							<br/>
+							Du skal udfylde tekstfelterne med &aring;rsagen til dine gode/d&aring;rlige oplevelser.
+						</h3>
 						<div id="wheel"></div>
 					</div>
 					<div id="action-zone">
@@ -45,10 +50,8 @@ i18n:domain="sl.bikeability">
 								</div>
 								<div id="ba1" class="button-activate">Klik her for at forts&aelig;tte med at tegne din rute</div>
 								<div class="instruction" id="instruction1">
-									Klik p&aring; kortet og tegn din rute.
-									Du kan tilfoslash;je punkter p&aring; et linjesegment ved at klikke p&aring firkanten i dets midte. 
-									Tr&aelig;k og slip p&aring; firkanterne for at tilpasse ruten. 
-									Klik <a onclick="redrawRoute()">her</a> for at starte forfra. 
+									Tegn den seneste rute du har cyklet (fx p&aring; arbejde eller i skole).
+									Brug musen til at tegne din rute. Du kan redigere ruten ved at &#39;tr&aelig;kke&#39; i firkanterne langs ruten.
 								</div>
 								
 							</div>
@@ -65,8 +68,8 @@ i18n:domain="sl.bikeability">
 									<div id="ba2" class="button-activate">Klik her for at tilf&oslash;je steder med gode oplevelser</div>
 									
 									<div class="instruction" id="instruction2">
-										Marker de 3 steder hvor du havde gode oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
-										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en god oplevelse. 
+										Mark&eacute;r op til 3 steder hvor du har havde en god oplevelse. Efter du har klikket p&aring; kortet vil vi bede dig om, 
+										at angive &aring;rsagen til din oplevelse. V&aelig;lg fra menuen og tilf&oslash;j evt. en uddybende kommentar.
 									</div>
 								
 
@@ -87,8 +90,8 @@ i18n:domain="sl.bikeability">
 									</div>
 									<div id="ba3" class="button-activate">Klik her for at tilf&oslash;je steder med d&aring;rlige oplevelser</div>
 									<div class="instruction" id="instruction3">
-										Marker de 3 steder hvor du havde d&aring;rlige oplevelser. Efter du har klikket p&aring; kortet vises der en boble i hvilken
-										vi beder dig om, at beskrive, hvad det var som har bevirket, at du havde en d&aring;rlig oplevelse. 
+										Mark&eacute;r op til 3 steder hvor du har havde en d&aring;rlig oplevelse. Efter du har klikket p&aring; kortet vil vi bede dig om, 
+										at angive &aring;rsagen til din oplevelse. V&aelig;lg fra menuen og tilf&oslash;j evt. en uddybende kommentar. 
 									</div>
 								</div>
 								
@@ -99,32 +102,32 @@ i18n:domain="sl.bikeability">
 
 						<div style="clear:both;">
 						</div>
-					<input name="good-drop0" id="good-drop0" />
-					<input name="good-text0" id="good-text0" />
-					<input name="good-coord0" id="good-coord0" />
+					<input name="good-drop0" id="good-drop0" type="hidden"/>
+					<input name="good-text0" id="good-text0" type="hidden"/>
+					<input name="good-coord0" id="good-coord0" type="hidden"/>
 					<br/>
-					<input name="good-drop1" id="good-drop1" />
-					<input name="good-text1" id="good-text1" />
-					<input name="good-coord1" id="good-coord1" />
+					<input name="good-drop1" id="good-drop1" type="hidden"/>
+					<input name="good-text1" id="good-text1" type="hidden"/>
+					<input name="good-coord1" id="good-coord1" type="hidden"/>
 					<br/>
-					<input name="good-drop2" id="good-drop2" />
-					<input name="good-text2" id="good-text2" />
-					<input name="good-coord2" id="good-coord2" />
+					<input name="good-drop2" id="good-drop2" type="hidden"/>
+					<input name="good-text2" id="good-text2" type="hidden"/>
+					<input name="good-coord2" id="good-coord2" type="hidden"/>
 					<br/>
-					<input name="bad-drop0" id="bad-drop0" />
-					<input name="bad-text0" id="bad-text0" />
-					<input name="bad-coord0" id="bad-coord0" />
+					<input name="bad-drop0" id="bad-drop0" type="hidden"/>
+					<input name="bad-text0" id="bad-text0" type="hidden"/>
+					<input name="bad-coord0" id="bad-coord0" type="hidden"/>
 					<br/>
-					<input name="bad-drop1" id="bad-drop1" />
-					<input name="bad-text1" id="bad-text1" />
-					<input name="bad-coord1" id="bad-coord1" />
+					<input name="bad-drop1" id="bad-drop1" type="hidden"/>
+					<input name="bad-text1" id="bad-text1" type="hidden"/>
+					<input name="bad-coord1" id="bad-coord1" type="hidden" />
 					<br/>
-					<input name="bad-drop2" id="bad-drop2" />
-					<input name="bad-text2" id="bad-text2" />
-					<input name="bad-coord2" id="bad-coord2" />
+					<input name="bad-drop2" id="bad-drop2" type="hidden" />
+					<input name="bad-text2" id="bad-text2" type="hidden"/>
+					<input name="bad-coord2" id="bad-coord2" type="hidden"/>
 					<br/>
-					<input name="polyline" id="polyline" />
-					<input name="respondentid" id="respondentid" tal:attributes="value respondentid"/>
+					<input name="polyline" id="polyline" type="hidden"/>
+					<input name="respondentid" id="respondentid" tal:attributes="value respondentid" type="hidden"/>
 
 					</form>
 					</div>

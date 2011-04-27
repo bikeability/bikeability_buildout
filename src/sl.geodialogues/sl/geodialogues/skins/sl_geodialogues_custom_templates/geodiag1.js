@@ -13,8 +13,11 @@ var polyLineListener = null;
 var polyLineListenerMarker = null;
 var GOOD_COUNTER = 0;
 var BAD_COUNTER = 0;
-var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
-var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
+// var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
+// var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
+
+var GOOD_GROUP_VALUES = [[]];
+var BAD_GROUP_VALUES = [[]];
 
 var GOOD_markers = [];
 var BAD_markers = [];
@@ -66,7 +69,6 @@ function initPolyline() {
 };
 
 function polyClick(event) {
-	alert(x);
 }
 
 function mapLeftClick(event) {
@@ -128,9 +130,8 @@ function redrawPolyline() {
 
 		path.push(pos);
 		marker = null;
-		updatePolyLineField();
-	
 	}
+	updatePolyLineField();
 }
 
 function createMarker(point) {
@@ -175,12 +176,16 @@ function createMarker(point) {
 				markers.splice(m, 1);
 				polyLine.getPath().removeAt(m);
 				removeVMarkers(m);
-				updatePolyLineField
 				break;
 			}
 		}
 		m = null;
+		updatePolyLineField();
 	});
+	
+	
+	
+	
 	markerListeners.push(marker_listener);
 	return marker;
 };
@@ -278,6 +283,7 @@ function reactivateMarkerListeners() {
 }
 
 function createVMarker(point) {
+	
 	var prevpoint = markers[markers.length-2].getPosition();
 	var imageNormal = new google.maps.MarkerImage(
 	"square_transparent.png",
@@ -362,6 +368,7 @@ function createVMarker(point) {
 				break;
 			}
 		}
+		
 	});
 	
 	var marker_listener = google.maps.event.addListener(marker, "click", function() {
@@ -376,6 +383,7 @@ function createVMarker(point) {
 			}
 	});
 	vMarkerListeners.push(marker_listener);
+	updatePolyLineField();
 	return marker;
 };
 
@@ -399,6 +407,7 @@ function moveVMarker(index) {
 	}
 	newpos = null;
 	index = null;
+	updatePolyLineField();
 };
 
 function removeVMarkers(index) {
@@ -472,6 +481,7 @@ function initializeButtons() {
 }
 
 function activateOne() {
+	
 	if (STATE==2) {
 		deactivateTwo();
 	}

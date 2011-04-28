@@ -499,7 +499,7 @@ function initializeButtons() {
 	jq("#button-4").bind("click", function() {
 		jq("#button-4").unbind();
 		activateFour();
-		alert("Tak for oplysninger om dine oplevelser. Din rute samt alle oplevelser er gemt og du kan nu lukke vinduet og gå tilbage til afslutning af spørgeskemaet");
+		alert("Tak for oplysningerne om dine oplevelser. Din rute samt alle oplevelser er gemt, og du kan nu lukke vinduet og gå tilbage for at afslutte spørgeskemaet.");
 	});
 	
 	

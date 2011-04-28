@@ -972,7 +972,7 @@ function placeBadMarker(location) {
 		saveData();
 
 	} else {
-		alert("Du har ikke mulighed for at beskrive flere end tre d&aring;lige oplevelser.");
+		alert("Du har ikke mulighed for at beskrive flere end tre daarlige oplevelser.");
 	}
 }
 

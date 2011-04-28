@@ -26,6 +26,14 @@ h2 {
 	height:528px;
 }
 
+.deletemarker {
+	color : red;
+	font-size: 12px;
+}
+
+.hidebubble {
+	font-size: 12px;
+}
 
 .button-activate {
 	cursor:pointer;

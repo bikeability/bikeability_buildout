@@ -23,11 +23,7 @@ i18n:domain="sl.bikeability">
 						<h2>
 							GODE OG D&Aring;RLIGE OPLEVELSER P&Aring; CYKELTUREN
 						</h2>
-						<h3>
-							Dette er en pilottest. Valgmuligheder p&aring; oplevelser er sl&aring;et fra.
-							<br/>
-							Du skal udfylde tekstfelterne med &aring;rsagen til dine gode/d&aring;rlige oplevelser.
-						</h3>
+						
 						<div id="wheel"></div>
 					</div>
 					<div id="action-zone">
@@ -117,7 +113,7 @@ i18n:domain="sl.bikeability">
 						<div style="clear:both;">
 						</div>
 					<input name="good-drop0" id="good-drop0" type="hidden"/>
-					<input name="good-text0" id="good-text0" type="hidden"/>
+					<input name="good-text0" id="good-text0"  type="hidden"/>
 					<input name="good-coord0" id="good-coord0" type="hidden"/>
 					<br/>
 					<input name="good-drop1" id="good-drop1" type="hidden"/>
@@ -134,9 +130,9 @@ i18n:domain="sl.bikeability">
 					<br/>
 					<input name="bad-drop1" id="bad-drop1" type="hidden"/>
 					<input name="bad-text1" id="bad-text1" type="hidden"/>
-					<input name="bad-coord1" id="bad-coord1" type="hidden" />
+					<input name="bad-coord1" id="bad-coord1"  type="hidden"/>
 					<br/>
-					<input name="bad-drop2" id="bad-drop2" type="hidden" />
+					<input name="bad-drop2" id="bad-drop2"  type="hidden"/>
 					<input name="bad-text2" id="bad-text2" type="hidden"/>
 					<input name="bad-coord2" id="bad-coord2" type="hidden"/>
 					<br/>

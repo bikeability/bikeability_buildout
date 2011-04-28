@@ -11,16 +11,14 @@ var STATE = 1;
 
 var polyLineListener = null;
 var polyLineListenerMarker = null;
-var GOOD_COUNTER = 0;
-var BAD_COUNTER = 0;
 // var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
 // var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
 
 var GOOD_GROUP_VALUES = [[]];
 var BAD_GROUP_VALUES = [[]];
 
-var GOOD_markers = [];
-var BAD_markers = [];
+var GOOD_markers = [null,null,null];
+var BAD_markers = [null,null,null];
 
 var GOOD_listener = null;
 var BAD_listener = null;
@@ -471,9 +469,15 @@ function initializeButtons() {
 	
 	activateOne();
 	
+	
+	jq("#button-4").bind("click", function() {
+		alert("Tak for din deltagelse. Din route samt alle oplevelser er gemt og du kan nu lukke vinduet.")
+	});
+	
 	jq("#ba1").button();
 	jq("#ba2").button();
 	jq("#ba3").button();
+	jq("#ba4").button();
 	
 	jq("instruction2").hide();
 	jq("instruction3").hide();
@@ -714,13 +718,42 @@ function updateDropDown(type,id) {
 	saveData();
 }
 
+
+function canAddGoodMarker() {
+	
+	for (var i=0;i<3;i++) {
+		if (GOOD_markers[i]==null) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function canAddBadMarker() {
+	
+	for (var i=0;i<3;i++) {
+		if (BAD_markers[i]==null) {
+			return true;
+		}
+	}
+	return false;
+}
+
 /*
  * placeGoodMarker() places a good marker and opens its bubble.
  *
  */
 function placeGoodMarker(location) {
 
-	if (GOOD_markers.length<3) {
+
+	if (canAddGoodMarker()) {
+
+		for (var i=0;i<3;i++) {
+			if (GOOD_markers[i]==null) {
+				var curr_id = i;
+				break;
+			}
+		}
 
 		var marker = new google.maps.Marker({
 			position: location,
@@ -728,14 +761,12 @@ function placeGoodMarker(location) {
 			icon :"green_icon.png",
 			draggable : true
 		});
-
-		var curr_id = GOOD_COUNTER;
-
+		
 		marker.set("id", curr_id);
 		map.setCenter(location);
 
 		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="tgood' + curr_id + '" id="tgood' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
-		curr_id + ');"></textarea><form>';
+		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
@@ -753,7 +784,7 @@ function placeGoodMarker(location) {
 					mtext="";
 				}
 				var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'good', g) + '<br/><textarea name="tgood' + v + '" id="tgood' + v + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' + 
-										 curr_id + ');">' + mtext  + '</textarea><form>';
+										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
 				var iw = new google.maps.InfoWindow({content : tb});
 				iw.open(map, marker);
 				google.maps.event.addListener(iw, "closeclick", function(event) {
@@ -765,7 +796,6 @@ function placeGoodMarker(location) {
 				
 			});
 		});
-		GOOD_COUNTER = GOOD_COUNTER + 1;
 		
 		jq("#good-coord" + curr_id).val(location.lat() + "," + location.lng());
 		
@@ -775,10 +805,32 @@ function placeGoodMarker(location) {
 			saveData();
 		});
 		
-		GOOD_markers.push(marker);
+		GOOD_markers[curr_id] = marker;
 		saveData();
+	} else {
+		alert("Du har ikke mulighed for at beskrive flere end tre gode oplevelser.");
 	}
 }
+
+function deleteGood(id) {
+
+	GOOD_markers[id].setMap(null);
+	GOOD_markers[id] = null;
+	jq("#good-coord" + id).val("");
+	jq("#good-text" + id).val("");
+	jq("#good-drop" + id).val("");
+}
+
+function deleteBad(id) {
+
+	BAD_markers[id].setMap(null);
+	BAD_markers[id] = null;
+	jq("#bad-coord" + id).val("");
+	jq("#bad-text" + id).val("");
+	jq("#bad-drop" + id).val("");
+}
+
+
 
 /*
  * placeGoodMarker() places a good marker and opens its bubble.
@@ -786,7 +838,14 @@ function placeGoodMarker(location) {
  */
 function placeBadMarker(location) {
 
-	if (BAD_markers.length<3) {
+	if (canAddBadMarker()) {
+
+		for (var i=0;i<3;i++) {
+			if (BAD_markers[i]==null) {
+				var curr_id = i;
+				break;
+			}
+		}
 
 		var marker = new google.maps.Marker({
 			position: location,
@@ -795,13 +854,11 @@ function placeBadMarker(location) {
 			draggable : true
 		});
 
-		var curr_id = BAD_COUNTER;
-
 		marker.set("id", curr_id);
 		map.setCenter(location);
 
 		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'bad') +'<br/><textarea name="tbad" id="tbad' + curr_id + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
-		curr_id + ');"></textarea><form>';
+		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteBad(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
@@ -819,7 +876,7 @@ function placeBadMarker(location) {
 					mtext="";
 				}
 				var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'bad', g) + '<br/><textarea name="ta" id="tbad' + v + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
-										 curr_id + ');">' + mtext  + '</textarea><form>';
+										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:deleteBad(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
 				var iw = new google.maps.InfoWindow({content : tb});
 				iw.open(map, marker);
 				google.maps.event.addListener(iw, "closeclick", function(event) {
@@ -829,7 +886,6 @@ function placeBadMarker(location) {
 				});
 			});
 		});
-		BAD_COUNTER = BAD_COUNTER + 1;
 		
 		jq("#bad-coord" + curr_id).val(location.lat() + "," + location.lng())
 		
@@ -840,11 +896,11 @@ function placeBadMarker(location) {
 		});
 		
 		
-		BAD_markers.push(marker);
+		BAD_markers[curr_id] = marker;
 		saveData();
 
 	} else {
-		alert("Du kan ikke beskrive flere end 3 oplevelser.");
+		alert("Du har ikke mulighed for at beskrive flere end tre d&aring;lige oplevelser.");
 	}
 }
 

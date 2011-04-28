@@ -23,6 +23,9 @@ i18n:domain="sl.bikeability">
 						<h2>
 							GODE OG D&Aring;RLIGE OPLEVELSER P&Aring; CYKELTUREN
 						</h2>
+						<div>
+							Hvis du vil starte forfra tryk p&aring; browserens genopfrisk knap. 
+						</div>
 						
 						<div id="wheel"></div>
 					</div>
@@ -44,11 +47,13 @@ i18n:domain="sl.bikeability">
 										1. TEGN DIN RUTE
 									</div>
 								</div>
-								<div id="ba1" class="button-activate">Klik her for at forts&aelig;tte med at tegne din rute</div>
+								<!--<div id="ba1" class="button-activate">Klik her for at forts&aelig;tte med at tegne din rute</div>-->
 								<div class="instruction" id="instruction1">
 									Tegn den seneste rute du har cyklet (fx p&aring; arbejde eller i skole).
 									Brug musen til at tegne din rute. Du kan redigere ruten ved at &#39;tr&aelig;kke&#39; i firkanterne langs ruten.
+									Du kan slette et punkt p&aring; ruten ved at klikke p&aring; det.  
 								</div>
+								<br/>
 								
 							</div>
 							
@@ -61,11 +66,13 @@ i18n:domain="sl.bikeability">
 											2. GODE OPLEVELSER
 										</div>
 									</div>
-									<div id="ba2" class="button-activate">Klik her for at tilf&oslash;je steder med gode oplevelser</div>
+									<!--<div id="ba2" class="button-activate">Klik her for at tilf&oslash;je steder med gode oplevelser</div>-->
 									
 									<div class="instruction" id="instruction2">
 										Mark&eacute;r op til 3 steder hvor du har havde en god oplevelse. Efter du har klikket p&aring; kortet vil vi bede dig om, 
 										at angive &aring;rsagen til din oplevelse. V&aelig;lg fra menuen og tilf&oslash;j evt. en uddybende kommentar.
+										Du kan flytte p&aring markeringerne ved at &#39;tr&aelig;kke&#39; dem rundt p&aring;, du kan til en hver tid rette i dine indtastinger 
+										eller slette en markering. Du kan skjule en tekstboks ved at klikke p&aring; krydset. 
 									</div>
 								
 
@@ -84,10 +91,12 @@ i18n:domain="sl.bikeability">
 											3. D&Aring;RLIGE OPLEVELSER
 										</div>
 									</div>
-									<div id="ba3" class="button-activate">Klik her for at tilf&oslash;je steder med d&aring;rlige oplevelser</div>
+									<!--<div id="ba3" class="button-activate">Klik her for at tilf&oslash;je steder med d&aring;rlige oplevelser</div>-->
 									<div class="instruction" id="instruction3">
 										Mark&eacute;r op til 3 steder hvor du har havde en d&aring;rlig oplevelse. Efter du har klikket p&aring; kortet vil vi bede dig om, 
 										at angive &aring;rsagen til din oplevelse. V&aelig;lg fra menuen og tilf&oslash;j evt. en uddybende kommentar. 
+										Du kan flytte p&aring markeringerne ved at &#39;tr&aelig;kke&#39; dem rundt p&aring;, du kan til en hver tid rette i dine indtastinger 
+										eller slette en markering. Du kan skjule en tekstboks ved at klikke p&aring; krydset.
 									</div>
 								</div>
 							</div>
@@ -99,9 +108,6 @@ i18n:domain="sl.bikeability">
 										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
 											4. AFSLUT
 										</div>
-									</div>
-									<div class="instruction" id="instruction4">
-										Du kan til enhver tid afslutte n&aring;r du er klar til det. Data bliver l&oslash;bende gemt. 
 									</div>
 										
 								

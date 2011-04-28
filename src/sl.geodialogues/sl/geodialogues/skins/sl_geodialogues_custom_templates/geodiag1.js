@@ -8,14 +8,40 @@ var vmarkers = [];
 
 var STATE = 1;
 
-
 var polyLineListener = null;
 var polyLineListenerMarker = null;
-// var GOOD_GROUP_VALUES = [['0','Vaelg oplevelsestype'],['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
-// var BAD_GROUP_VALUES = [['0','Vaelg oplevelsestype'], ['sikker','Sikkerhed'],['stoej','St&oslash;j'],['udsigt','Udsigt'],['groent','Gr&oslash;nne omgivelser'], ['belaeg','Bel&aelig;gning'], ['andrecyk','Andre cyklisters adf&aelig;rd'],['fremkom','Fremkommelighed']];
 
-var GOOD_GROUP_VALUES = [[]];
-var BAD_GROUP_VALUES = [[]];
+
+var GOOD_GROUP_VALUES = [['0','V&aelig;lg'],
+						 ['god_sti_bel','God cykelsti/bel&aelig;gning'],
+						 ['god_cykel_park','God cykelparkering'],
+						 ['smuk_groen_omgiv','Smukke, gr&oslash;nne omgivelser'],
+						 ['god_fremk','God fremkommelighed, f&aring; stops'],
+						 ['ned_bakke', 'Det g&aring;r ned ad bakke'],
+						 ['god_udsigt','God udsigt'],
+						 ['mulighed_koere_staerkt', 'Mulighed for at k&oslash;re st&aelig;rkt'],
+						 ['andre_cyklister','Andre cyklister'],
+						 ['andre_cyklister_smiler','Andre cyklister, der smiler'],
+						 ['andet','Andet']
+						 ];
+						 
+
+var BAD_GROUP_VALUES = [['0','V&aelig;lg'],
+					    ['farligt_kryds','Farligt kryds'],
+					    ['larm_forurening','Larm/forurening'],
+					    ['vejarbejde','Vejarbejde'],
+					    ['fordg_pa_cykelsti','Fodg&aelig;ngere p&aring; cykelstien/vejbanen'],
+					    ['biler_taet_paa','Biler, busser og lastbiler t&aelig;t p&aring;'],
+					    ['manglende_cykelpark','Manglende cykelparkering'],
+					    ['daarlig_beleagn','D&aring;rlig bel&aelig;gning/huller i asfalten'],
+					    ['biler_parkeret','Biler mm. parkeret p&aring; cykelstien'],
+					    ['op_ad_bakke','Det g&aring;r op ad bakke'],
+					    ['andre_cyk','Andre cyklister'],
+					    ['andre_cyk_raaber','Andre cyklister, der r&aring;ber/sk&aeliglder ud'],
+					    ['for_mange_andre','For mange andre cyklister'],
+					    ['andet','Andet']
+					    ];
+
 
 var GOOD_markers = [null,null,null];
 var BAD_markers = [null,null,null];
@@ -35,9 +61,9 @@ function initMap(mapHolder) {
 	markers = [];
 	vmarkers = [];
 	var mapOptions = {
-		zoom: 13,
+		zoom: 12,
 		center: new google.maps.LatLng(55.684166, 12.544606),
-		mapTypeId: google.maps.MapTypeId.HYBRID,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		draggableCursor: 'auto',
 		draggingCursor: 'move',
 		disableDoubleClickZoom: true
@@ -376,7 +402,7 @@ function createVMarker(point) {
 			}
 
 			if (STATE==3) {
-				alert("S=3");
+				// alert("S=3");
 				placeBadMarker(event.latLng);
 			}
 	});
@@ -471,13 +497,11 @@ function initializeButtons() {
 	
 	
 	jq("#button-4").bind("click", function() {
-		alert("Tak for din deltagelse. Din route samt alle oplevelser er gemt og du kan nu lukke vinduet.")
+		jq("#button-4").unbind();
+		activateFour();
+		alert("Tak for din deltagelse. Din rute samt alle oplevelser er gemt og du kan nu lukke vinduet.")
 	});
 	
-	jq("#ba1").button();
-	jq("#ba2").button();
-	jq("#ba3").button();
-	jq("#ba4").button();
 	
 	jq("instruction2").hide();
 	jq("instruction3").hide();
@@ -495,6 +519,10 @@ function activateOne() {
 
 	if (STATE==3) {
 		deactivateThree();
+	}
+	if (STATE==4) {
+		nextState=1;
+		deactivateFour();
 	}
 
 	polyLineListener = google.maps.event.addListener(map, "click", mapLeftClick);
@@ -545,6 +573,10 @@ function activateTwo() {
 	if (STATE==3) {
 		nextState = 2;
 		deactivateThree();
+	}
+	if (STATE==4) {
+		nextState=2;
+		deactivateFour();
 	}
 
 	STATE=2;
@@ -610,6 +642,11 @@ function activateThree() {
 		deactivateOne();
 	}
 	
+	if (STATE==4) {
+		nextState=3;
+		deactivateFour();
+	}
+	
 	STATE = 3;
 	/*for (var v=0;v<vmarkers.length;v++) {
 		google.maps.event.addListener(vmarkers[v],'click', function(event) {
@@ -628,6 +665,10 @@ function activateThree() {
 	jq("#ba3").hide();
 }
 
+
+
+
+
 function deactivateThree() {
 
 	google.maps.event.removeListener(polyLineListenerMarker);
@@ -644,6 +685,37 @@ function deactivateThree() {
 	});
 	jq("#instruction3").css("color","lightgray");
 	jq("#ba3").show();
+}
+
+function activateFour() {
+	
+	if (STATE==2) {
+		nextState=3;
+		deactivateTwo();
+	}
+	if (STATE==1) {
+		nextState=3;
+		deactivateOne();
+	}
+
+	if (STATE==3) {
+		nextState=4;
+		deactivateThree();
+	}
+	
+	STATE = 4;
+	jq("#wrapper-4").css("background-color","#FF0000");
+}
+
+function deactivateFour() {
+
+	jq("#wrapper-4").css("background-color","lightgrey");
+
+	jq("#button-4").bind("click", function() {
+		jq("#button-4").unbind();
+		activateFour();
+	});
+	jq("#ba4").show();
 }
 
 /*
@@ -765,8 +837,8 @@ function placeGoodMarker(location) {
 		marker.set("id", curr_id);
 		map.setCenter(location);
 
-		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="tgood' + curr_id + '" id="tgood' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
-		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
+		var iwc1 = '<div class="google_spacer"></div><form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="tgood' + curr_id + '" id="tgood' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
+		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">fjern oplevelse</a><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
@@ -783,8 +855,8 @@ function placeGoodMarker(location) {
 				if (mtext == undefined) {
 					mtext="";
 				}
-				var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'good', g) + '<br/><textarea name="tgood' + v + '" id="tgood' + v + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' + 
-										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
+				var tb = '<div class="google_spacer"><form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'good', g) + '<br/><textarea name="tgood' + v + '" id="tgood' + v + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' + 
+										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">fjern oplevelse</a><form>';
 				var iw = new google.maps.InfoWindow({content : tb});
 				iw.open(map, marker);
 				google.maps.event.addListener(iw, "closeclick", function(event) {
@@ -857,8 +929,8 @@ function placeBadMarker(location) {
 		marker.set("id", curr_id);
 		map.setCenter(location);
 
-		var iwc1 = '<form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'bad') +'<br/><textarea name="tbad" id="tbad' + curr_id + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
-		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteBad(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
+		var iwc1 = '<div class="google_spacer"></div><form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'bad') +'<br/><textarea name="tbad" id="tbad' + curr_id + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
+		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteBad(' + curr_id + ');return null;">fjern oplevelse</a><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
@@ -875,8 +947,8 @@ function placeBadMarker(location) {
 				if (mtext == undefined) {
 					mtext="";
 				}
-				var tb = '<form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'bad', g) + '<br/><textarea name="ta" id="tbad' + v + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
-										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:deleteBad(' + curr_id + ');return null;">fjern mark&oslash;r</a><form>';
+				var tb = '<div class="google_spacer"><form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'bad', g) + '<br/><textarea name="ta" id="tbad' + v + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
+										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:deleteBad(' + curr_id + ');return null;">fjern oplevelse</a><form>';
 				var iw = new google.maps.InfoWindow({content : tb});
 				iw.open(map, marker);
 				google.maps.event.addListener(iw, "closeclick", function(event) {

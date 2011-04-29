@@ -549,7 +549,7 @@ function deactivateOne() {
 	google.maps.event.clearInstanceListeners(map);
 	
 
-	jq("#wrapper-1").css("background-color","lightgrey");
+	jq("#wrapper-1").css("background-color","#d3d3d3");
 	jq("#b1").css("background-image",'url(dot-grey.png)');
 
 	deactivateMarkerListeners();
@@ -559,7 +559,7 @@ function deactivateOne() {
 		jq("#button-1").unbind();
 		activateOne();
 	});
-	jq("#instruction1").css("color","lightgray");
+	jq("#instruction1").css("color","#d3d3d3");
 	jq("#ba1").show();
 }
 
@@ -615,7 +615,7 @@ function deactivateTwo() {
 	deactivateMarkerListeners();
 	deactivateVMarkerListeners();
 
-	jq("#wrapper-2").css("background-color","lightgrey");
+	jq("#wrapper-2").css("background-color","#d3d3d3");
 
 	jq("#button-2").bind("click", function() {
 		jq("#button-2").unbind();
@@ -627,7 +627,7 @@ function deactivateTwo() {
 	}
 	
 	jq("#ba2").show();
-	jq("#instruction2").css("color","lightgray");
+	jq("#instruction2").css("color","#d3d3d3");
 	
 }
 
@@ -677,13 +677,13 @@ function deactivateThree() {
 	deactivateMarkerListeners();
 	deactivateVMarkerListeners();
 
-	jq("#wrapper-3").css("background-color","lightgrey");
+	jq("#wrapper-3").css("background-color","#d3d3d3");
 
 	jq("#button-3").bind("click", function() {
 		jq("#button-3").unbind();
 		activateThree();
 	});
-	jq("#instruction3").css("color","lightgray");
+	jq("#instruction3").css("color","#d3d3d3");
 	jq("#ba3").show();
 }
 
@@ -709,7 +709,7 @@ function activateFour() {
 
 function deactivateFour() {
 
-	jq("#wrapper-4").css("background-color","lightgrey");
+	jq("#wrapper-4").css("background-color","#d3d3d3");
 
 	jq("#button-4").bind("click", function() {
 		jq("#button-4").unbind();
@@ -838,7 +838,7 @@ function placeGoodMarker(location) {
 		map.setCenter(location);
 
 		var iwc1 = '<div class="google_spacer"></div><form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="tgood' + curr_id + '" id="tgood' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
-		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:deleteGood(' + curr_id + ');return null;">Fjern oplevelse</a><form>';
+		curr_id + ');"></textarea><br/><a class="deletemarker" onclick="google.maps.event.clearInstanceListeners(map);deleteGood(' + curr_id + ');">Fjern oplevelse</a><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);

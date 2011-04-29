@@ -838,7 +838,7 @@ function placeGoodMarker(location) {
 		map.setCenter(location);
 
 		var iwc1 = '<div class="google_spacer"></div><form id="f' + curr_id + '"> '+ createDropdown(curr_id, 'good') +'<br/><textarea name="tgood' + curr_id + '" id="tgood' + curr_id + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' +
-		curr_id + ');"></textarea><br/><a class="deletemarker" onclick="google.maps.event.clearInstanceListeners(map);deleteGood(' + curr_id + ');">Fjern oplevelse</a><form>';
+		curr_id + ');"></textarea><br/><a class="deletemarker" href="javascript:google.maps.event.clearInstanceListeners(map);deleteGood(' + curr_id + ');">Fjern oplevelse</a><form>';
 
 		var iw1 = new google.maps.InfoWindow({content : iwc1});
 		iw1.open(map, marker);
@@ -856,7 +856,7 @@ function placeGoodMarker(location) {
 					mtext="";
 				}
 				var tb = '<div class="google_spacer"><form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'good', g) + '<br/><textarea name="tgood' + v + '" id="tgood' + v + '" onkeyup="updateText(' + singlequote + 'good' + singlequote + ',' + 
-										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" onclick="google.maps.event.clearInstanceListeners(map);deleteGood(' + curr_id + ');">Fjern oplevelse</a><form>';
+										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:google.maps.event.clearInstanceListeners(map);deleteGood(' + curr_id + ');">Fjern oplevelse</a><form>';
 				var iw = new google.maps.InfoWindow({content : tb});
 				iw.open(map, marker);
 				google.maps.event.addListener(iw, "closeclick", function(event) {
@@ -950,7 +950,7 @@ function placeBadMarker(location) {
 					mtext="";
 				}
 				var tb = '<div class="google_spacer"><form id="f' + curr_id + '">' + createDropdownSelected(curr_id, 'bad', g) + '<br/><textarea name="ta" id="tbad' + v + '" onkeyup="updateText(' + singlequote + 'bad' + singlequote + ',' +
-										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" onclick="google.maps.event.clearInstanceListeners(map);deleteBad(' + curr_id + ');return null;">Fjern oplevelse</a><form>';
+										 curr_id + ');">' + mtext  + '</textarea><br/><a class="deletemarker" href="javascript:google.maps.event.clearInstanceListeners(map);deleteBad(' + curr_id + ');">Fjern oplevelse</a><form>';
 				var iw = new google.maps.InfoWindow({content : tb});
 				iw.open(map, marker);
 				google.maps.event.addListener(iw, "closeclick", function(event) {

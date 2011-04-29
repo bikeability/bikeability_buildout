@@ -61,7 +61,7 @@ i18n:domain="sl.bikeability">
 																
 									<div id="wrapper-2" class="b-wrapper">
 										<div class="button-text" id="text2" i18n:translate="gode_oplevelser">
-											2. GODE OPLEVELSER
+											2. MARK&Eacute;R GODE OPLEVELSER
 										</div>
 									</div>
 									<!--<div id="ba2" class="button-activate">Klik her for at tilf&oslash;je steder med gode oplevelser</div>-->
@@ -86,7 +86,7 @@ i18n:domain="sl.bikeability">
 								
 									<div id="wrapper-3" class="b-wrapper">
 										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
-											3. D&Aring;RLIGE OPLEVELSER
+											3. MARK&Eacute;R D&Aring;RLIGE OPLEVELSER
 										</div>
 									</div>
 									<!--<div id="ba3" class="button-activate">Klik her for at tilf&oslash;je steder med d&aring;rlige oplevelser</div>-->
@@ -104,7 +104,7 @@ i18n:domain="sl.bikeability">
 								
 									<div id="wrapper-4" class="b-wrapper">
 										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
-											4. AFSLUT
+											4. GEM & AFSLUT
 										</div>
 									</div>
 										

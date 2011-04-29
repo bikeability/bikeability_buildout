@@ -57,13 +57,19 @@ h2 {
 
 
 .b-wrapper {
-	/*float:left;*/
-	/*margin-top:13px;*/
-	/*height:30px;*/
 	cursor:pointer;
 	background-color:#d3d3d3;
 	padding:0.2em;
 }
+
+.b-wrapper:hover {
+	background-color: #ffc354;
+}
+
+#wrapper-1:hover {
+	background-color: #ffc354;
+}
+
 
 .button {
 	padding-left:10px;
@@ -88,9 +94,7 @@ h2 {
 	font-size: 1.2em;
 }
 
-.b-wrapper:hover {
-	background-color: #ffc354;
-}
+
 
 .okbutt {
 	float : left;

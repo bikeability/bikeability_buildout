@@ -560,6 +560,14 @@ function deactivateOne() {
 		activateOne();
 	});
 	jq("#instruction1").css("color","#d3d3d3");
+	
+	$("#wrapper-1").hover( function(){
+     	$(this).css('background-color', '#ffc354');
+	}, 
+	function(){
+     	$(this).css('background-color', '#d3d3d3');
+	});
+	
 	jq("#ba1").show();
 }
 
@@ -629,6 +637,13 @@ function deactivateTwo() {
 	jq("#ba2").show();
 	jq("#instruction2").css("color","#d3d3d3");
 	
+	$("#wrapper-2").hover( function(){
+     	$(this).css('background-color', '#ffc354');
+	}, 
+	function(){
+     	$(this).css('background-color', '#d3d3d3');
+	});
+	
 }
 
 function activateThree() {
@@ -685,6 +700,14 @@ function deactivateThree() {
 	});
 	jq("#instruction3").css("color","#d3d3d3");
 	jq("#ba3").show();
+	
+	$("#wrapper-3").hover( function(){
+     	$(this).css('background-color', '#ffc354');
+	}, 
+	function(){
+     	$(this).css('background-color', '#d3d3d3');
+	});
+	
 }
 
 function activateFour() {
@@ -716,6 +739,14 @@ function deactivateFour() {
 		activateFour();
 	});
 	jq("#ba4").show();
+	
+	$("#wrapper-4").hover( function(){
+     	$(this).css('background-color', '#ffc354');
+	}, 
+	function(){
+     	$(this).css('background-color', '#d3d3d3');
+	});
+	
 }
 
 /*

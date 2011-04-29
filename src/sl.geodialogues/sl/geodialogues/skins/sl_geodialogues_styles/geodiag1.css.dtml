@@ -45,7 +45,7 @@ h2 {
 }
 
 .instruction {
-	color : lightgray;
+	color : #d3d3d3;
 	font-size: 0.9em;
 }
 
@@ -61,7 +61,7 @@ h2 {
 	/*margin-top:13px;*/
 	/*height:30px;*/
 	cursor:pointer;
-	background-color:lightgray;
+	background-color:#d3d3d3;
 	padding:0.2em;
 }
 

@@ -19,6 +19,24 @@ h2 {
 	width : 300px;
 }
 
+#ajaxBusy {
+	padding-top : 7px;
+	padding-bottom : 3px;
+	display : none;
+	color : red;
+	background-color: white;
+}
+
+#ajaxBusy img {
+	float : left;
+	padding : 5px;
+}
+
+.gemmer {
+	float : left;
+	padding-top:10px;
+}
+
 #button-wrapper {
 	float:left;
 	width:30em;

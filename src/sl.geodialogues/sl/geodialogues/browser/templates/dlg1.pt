@@ -105,7 +105,14 @@ i18n:domain="sl.bikeability">
 									<div id="wrapper-4" class="b-wrapper">
 										<div class="button-text" id="text3" i18n:translate="daarlige_oplevelser">
 											4. GEM & AFSLUT
+											
 										</div>
+										<div id="ajaxBusy">
+												<img src="ajax_wheel.gif"> 
+												<div class="gemmer">... GEMMER ...</div>
+												<div style="clear:both;">
+											</div>
+										
 									</div>
 										
 								
@@ -115,6 +122,7 @@ i18n:domain="sl.bikeability">
 	
 
 						<div style="clear:both;">
+
 						</div>
 					<input name="good-drop0" id="good-drop0" type="hidden"/>
 					<input name="good-text0" id="good-text0"  type="hidden"/>

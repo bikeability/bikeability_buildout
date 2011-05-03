@@ -49,7 +49,7 @@ i18n:domain="sl.bikeability">
 								</div>
 								<!--<div id="ba1" class="button-activate">Klik her for at forts&aelig;tte med at tegne din rute</div>-->
 								<div class="instruction" id="instruction1">
-									Tegn den seneste rute du har cyklet (fx p&aring; arbejde eller i skole).
+									Zoom ind s&aring; du kan se detaljer og tegn den seneste rute du har cyklet (fx p&aring; arbejde eller i skole).
 									Brug musen til at tegne din rute. Du kan redigere ruten ved at &#39;tr&aelig;kke&#39; i firkanterne langs ruten.
 									Du kan slette et punkt p&aring; ruten ved at klikke p&aring; det.  
 								</div>

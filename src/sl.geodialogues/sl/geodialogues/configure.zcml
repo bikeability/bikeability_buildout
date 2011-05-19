@@ -20,5 +20,8 @@
 	            />
 	    </class>
 
+    <!-- The tool needs this -->
+    <five:deprecatedManageAddDelete class=".geo_tool.GEOTool" />
 
 </configure>
+

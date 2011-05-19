@@ -1,0 +1,17 @@
+#Wed May 18 18:36:40 CEST 2011
+eclipse.preferences.version=1
+encoding//src/sl.geodialogues/setup.py=utf-8
+encoding//src/sl.geodialogues/sl/__init__.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/__init__.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/bikeability_dialogue.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/config.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/interfaces.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/measurement_view.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/save_shp_file.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/viewlets.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/geo_tool.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/interfaces.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/measurement.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/setuphandlers.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/skins/sl_geodialogues_custom_templates/geodiag1.js=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/tests.py=utf-8

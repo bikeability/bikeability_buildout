@@ -58,5 +58,12 @@
 		layer=".interfaces.IThemeSpecific"
 		/>      
       
+    <browser:page
+		for="*"
+		name="save_shp"
+		permission="zope2.View"
+		class=".save_shp_file.SaveShpFile"
+		layer=".interfaces.IThemeSpecific"
+		/>  
 
 </configure>

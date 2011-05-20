@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/prefs_main_template/macros/master">
+
+<body>
+
+
+<metal:main metal:fill-slot="prefs_configlet_main" i18n:domain="plone"
+        tal:define="QI python:context.portal_url.getPortalObject().portal_quickinstaller;">
+
+    <h1 class="documentFirstHeading"
+        i18n:translate="">GEO Webservices</h1>
+
+    <div class="documentDescription"
+       i18n:translate="">
+      Here, you can change settings for the LIFE GEO Webservices.
+    </div>
+
+    <div id="content-core">
+       <a href=""
+           class="link-parent"
+           tal:attributes="href string:${context/portal_url}/plone_control_panel"
+           i18n:translate="label_up_to_plone_setup">
+          Up to Site Setup
+        </a>
+
+
+        <form style="float: left;"
+              action="installProducts"
+              tal:attributes="action python:QI.absolute_url()+'/installProducts'"
+              method="post">
+
+            <fieldset style="margin-right: 1em;">
+                <legend i18n:translate="">The Good</legend>
+
+               <div class="field">
+                    <label for="goods" i18n:translate="label_goods_password">The Good</label>
+
+                    <div class="formHelp" i18n:translate="help_goods">
+                    Enter the number of allowed good experiences.
+                    </div>
+
+                    <input type="goods"
+                           id="current"
+                           name="current"
+                           size="10"
+                           />
+                </div>
+                <div>
+                	<a tal:attributes="href string:${context/portal_url}/portal_vocabularies/goods">Click here to edit the group definitions of 'The goods'.</a>
+                </div>
+               
+                <br/>
+             	
+             	<div class="field">
+                    <label for="bads" i18n:translate="label_bads_password">The bad</label>
+
+                    <div class="formHelp" i18n:translate="help_bads">
+                    Enter the number of allowed bad experiences.
+                    </div>
+
+                    <input type="bads"
+                           id="current"
+                           name="current"
+                           size="10"
+                           />
+                </div>
+                <div>
+                	<a tal:attributes="href string:${context/portal_url}/portal_vocabularies/goods">Click here to edit the group definitions of 'The Bad'.</a>
+                </div>
+                
+                 <div class="formControls">
+                    <input class="context"
+                           type="submit"
+                           value="Change Password"
+                           i18n:attributes="value label_change_password;"
+                           />
+                    <input class="standalone"
+                           type="submit"
+                           name="cancel"
+                           value="Cancel"
+                           i18n:attributes="value label_cancel;"
+                           />
+                </div>
+                   
+
+            </fieldset>
+        </form>
+        <div class="visualClear" id="clear-space-after-broken"><!-- --></div>
+    </div>
+</metal:main>
+
+</body>
+</html>

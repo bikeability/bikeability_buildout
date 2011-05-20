@@ -22,11 +22,11 @@
 from Products.Five import BrowserView
 from plone.memoize.view import memoize
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.app.component.hooks import getSite
 import transaction
 from DateTime import DateTime
 from random import random
 from Products.CMFPlone.utils import _createObjectByType
+from zope.app.component.hooks import getSite
 
 
 class BikeabilityDialogue1(BrowserView):

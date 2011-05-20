@@ -8,4 +8,14 @@
     Various import steps that are not handled by GS import/export
     handlers.
   </import-step>
+  
+    <import-step id="sl.geodialogues.importvocabs"
+               version="20110520-01"
+               handler="sl.geodialogues.setuphandlers.setupVocabs"
+               title="GeoDialogues: import vxcabs">
+    <dependency step="skins" />
+    Various import steps that are not handled by GS import/export
+    handlers.
+  </import-step>
+  
 </import-steps>

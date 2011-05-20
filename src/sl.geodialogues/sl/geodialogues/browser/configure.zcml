@@ -13,7 +13,6 @@
   <!-- Viewlets registration -->
   <!-- Zope 3 browser resources -->
 
-  <!-- Resource directory for images -->
   <browser:resourceDirectory
       name="sl.geodialogues.images"
       directory="images"
@@ -56,7 +55,23 @@
 		permission="zope2.View"
 		class=".bikeability_dialogue.BikeabilityDialogue1Save"
 		layer=".interfaces.IThemeSpecific"
-		/>      
+		/>  
+		    
+    <browser:page
+		for="*"
+		name="geo_config_form"
+		permission="zope2.View"
+		class=".geo_config_form.GeoConfigFormView"
+		layer=".interfaces.IThemeSpecific"
+		/>  
+    <browser:page
+		for="*"
+		name="js_bootstrap"
+		permission="zope2.View"
+		class=".js_bootstrap.JSBootstrap"
+		layer=".interfaces.IThemeSpecific"
+		/>  
+      
       
     <browser:page
 		for="*"

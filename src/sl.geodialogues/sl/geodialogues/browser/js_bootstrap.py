@@ -36,3 +36,17 @@ class JSBootstrap(BrowserView):
         """
         """    
         return self.template()
+    
+    def getGOODString(self):
+        """
+        """
+        import pdb;pdb.set_trace()
+        gs = ""
+        for x in []:
+            gs = gs + "['0','V&aelig;lg']",
+        return "var GOOD_GROUP_VALUES = []"
+        
+    def getBADString(self):
+        """
+        """
+        return "var BAD_GROUP_VALUES = []"

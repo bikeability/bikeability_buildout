@@ -15,7 +15,7 @@
 
 
     <!-- The tool needs this -->
-    <five:deprecatedManageAddDelete class=".geo_tool.GEOTool" />
+    <five:deprecatedManageAddDelete class="sl.geoservices.GEOTool.GEOTool" />
 
 </configure>
 

@@ -30,6 +30,7 @@ from Products.CMFCore.permissions import ManagePortal
 from sl.geoservices.content import Investigation 
 from Products.CMFPlone.PloneBaseTool import PloneBaseTool
 from OFS.Folder import Folder
+from Products.CMFCore.utils import registerToolInterface
 
 class GEOTool(PloneBaseTool, Folder, UniqueObject, SimpleItem):
     """The GEO Tool

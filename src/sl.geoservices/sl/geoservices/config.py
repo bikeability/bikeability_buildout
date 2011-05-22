@@ -3,11 +3,11 @@ from Products.Archetypes.public import DisplayList
 
 ADD_CONTENT_PERMISSION = permissions.AddPortalContent
 VIEW_CONTENTS_PERMISSION = permissions.View
-PROJECTNAME = "sl.geodialogues"
+PROJECTNAME = "sl.geoservices"
 SKINS_DIR = 'skins'
 ADD_PERMISSIONS = {
-                  "Measurement"   : "sl.geoldialogues:Measurement",
-                  "Investigation" : "sl.geoldialogues:Investigation"}
+                  "Measurement"   : "sl.geoservices:Measurement",
+                  "Investigation" : "sl.geoservices:Investigation"}
 
 VIEWLETS = []
 

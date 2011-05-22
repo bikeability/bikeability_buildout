@@ -1,4 +1,4 @@
-from sl.geodialogues import config
+from sl.geoservices import config
 
 from zope.i18nmessageid import MessageFactory
 
@@ -8,13 +8,14 @@ from Products.CMFCore import utils
 from Products.CMFCore.utils import ToolInit
 
 # the message factory
-slMessageFactory = MessageFactory('sl.geodialogues')
+slMessageFactory = MessageFactory('sl.geoservices')
 
 packageName = __name__
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
-    from sl.geodialogues.measurement import Measurement
+    from sl.geoservices.measurement import Measurement
+    from sl.geoservices.investigation import Investigation
     
     content_types, constructors, ftis = atapi.process_types(
         atapi.listTypes(config.PROJECTNAME),

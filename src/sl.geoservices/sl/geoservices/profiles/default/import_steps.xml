@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <import-steps>
-  <import-step id="sl.geodialogues.various"
+  <import-step id="sl.geoservices.various"
                version="20110331-01"
-               handler="sl.geodialogues.setuphandlers.setupVarious"
+               handler="sl.geoservices.setuphandlers.setupVarious"
                title="GeoDialogues: miscellaneous import steps">
     <dependency step="skins" />
     Various import steps that are not handled by GS import/export
     handlers.
   </import-step>
   
-    <import-step id="sl.geodialogues.importvocabs"
+    <import-step id="sl.geoservices.importvocabs"
                version="20110520-01"
-               handler="sl.geodialogues.setuphandlers.setupVocabs"
+               handler="sl.geoservices.setuphandlers.setupVocabs"
                title="GeoDialogues: import vxcabs">
     <dependency step="skins" />
     Various import steps that are not handled by GS import/export

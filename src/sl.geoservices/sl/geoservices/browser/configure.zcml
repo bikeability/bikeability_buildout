@@ -1,7 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="sl.geodialogues">
+    i18n_domain="sl.geoservices">
 
   <!-- 'GeoDialogues' Zope 3 browser layer -->
   <interface
@@ -14,21 +14,21 @@
   <!-- Zope 3 browser resources -->
 
   <browser:resourceDirectory
-      name="sl.geodialogues.images"
+      name="sl.geoservices.images"
       directory="images"
       layer=".interfaces.IThemeSpecific"
       />
 
   <!-- Resource directory for stylesheets -->
   <browser:resourceDirectory
-      name="sl.geodialogues.stylesheets"
+      name="sl.geoservices.stylesheets"
       directory="stylesheets"
       layer=".interfaces.IThemeSpecific"
       />
 
   <!-- Resource directory for javascripts -->
   <browser:resourceDirectory
-      name="sl.geodialogues.javascripts"
+      name="sl.geoservices.javascripts"
       directory="javascripts"
       layer=".interfaces.IThemeSpecific"
       />
@@ -42,7 +42,7 @@
 		/>
 
     <browser:page
-		for="sl.geodialogues.content.investigation.Investigation"
+		for="sl.geoservices.content.investigation.Investigation"
 		name="investigation_view"
 		permission="zope2.View"
 		class=".investigation_view.InvestigationView"
@@ -50,7 +50,7 @@
 		/>
 		
     <browser:page
-		for="sl.geodialogues.content.measurement.Measurement"
+		for="sl.geoservices.content.measurement.Measurement"
 		name="measurement_view"
 		permission="zope2.View"
 		class=".measurement_view.MeasurementView"

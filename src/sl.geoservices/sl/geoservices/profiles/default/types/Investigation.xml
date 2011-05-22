@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
-<object name="Measurement"
+<object name="Investigation"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Measurement</property>
  <property name="description"
-    i18n:translate="">A single measurement</property>
- <property name="icon_expr">string:${portal_url}/measurement_icon.png</property>
- <property name="content_meta_type">Measurement</property>
- <property name="product">sl.geodialogues</property>
- <property name="factory">addMeasurement</property>
+    i18n:translate="">An Investiagtion</property>
+ <property name="icon_expr">string:${portal_url}/investigation_icon.png</property>
+ <property name="content_meta_type">Investiagtion</property>
+ <property name="product">sl.geoservices</property>
+ <property name="factory">addInvestiagtion</property>
  <property name="add_view_expr"></property>
  <property name="link_target"></property>
  <property name="immediate_view">atct_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
- <property name="allowed_content_types"/>
+ <property name="allowed_content_types">
+ 	 <element value="Measurement"/>
+ </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">measurement_view</property>
  <property name="view_methods">
@@ -26,7 +28,7 @@
  <alias from="sharing" to="@@sharing"/>
  <alias from="view" to="(selected layout)"/>
  <action title="View" action_id="view" category="object" condition_expr=""
-    icon_expr="" link_target="" url_expr="string:${object_url}/measurement_view"
+    icon_expr="" link_target="" url_expr="string:${object_url}/investigation_view"
     visible="True">
   <permission value="View"/>
  </action>

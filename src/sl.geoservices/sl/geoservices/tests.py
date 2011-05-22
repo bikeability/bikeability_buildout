@@ -30,14 +30,14 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 ptc.setupPloneSite()
 
-import sl.geodialogues
+import sl.geoservices
 
 class TestCase(ptc.PloneTestCase):
     class layer(PloneSite):
         @classmethod
         def setUp(cls):
             fiveconfigure.debug_mode = True
-            ztc.installPackage(sl.geodialogues)
+            ztc.installPackage(sl.geoservices)
             fiveconfigure.debug_mode = False
 
         @classmethod
@@ -50,21 +50,21 @@ def test_suite():
 
         # Unit tests
         #doctestunit.DocFileSuite(
-        #    'README.txt', package='sl.geodialogues',
+        #    'README.txt', package='sl.geoservices',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
         #doctestunit.DocTestSuite(
-        #    module='sl.geodialogues.mymodule',
+        #    module='sl.geoservices.mymodule',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
 
         # Integration tests that use PloneTestCase
         #ztc.ZopeDocFileSuite(
-        #    'README.txt', package='sl.geodialogues',
+        #    'README.txt', package='sl.geoservices',
         #    test_class=TestCase),
 
         #ztc.FunctionalDocFileSuite(
-        #    'browser.txt', package='sl.geodialogues',
+        #    'browser.txt', package='sl.geoservices',
         #    test_class=TestCase),
 
         ])

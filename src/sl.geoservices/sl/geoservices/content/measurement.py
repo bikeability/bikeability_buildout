@@ -19,18 +19,14 @@
 #
 ######################################################################################
 from AccessControl import ClassSecurityInfo
-from Products.ATContentTypes.content.base import ATCTFolderMixin, registerATCT
 from Products.ATContentTypes.interface import IATFolder
 from Products.Archetypes import atapi
 from Products.Archetypes.public import BaseContent, registerType, BaseSchema, \
     Schema, ImageField, ImageWidget, StringField, StringWidget, TextField, \
     TextAreaWidget
 from Products.CMFCore import permissions
-from plone.app.folder.base import BaseBTreeFolder
-from sl.geodialogues.config import PROJECTNAME
-from sl.geodialogues.content.interfaces import IInvestigation
-from zope.interface import implements
-
+from sl.geoservices.config import PROJECTNAME
+from sl.geoservices.content.interfaces import IMeasurement
 
 try:
     from Products.LinguaPlone.I18NBaseObject import I18NBaseObject
@@ -46,42 +42,40 @@ except:
             pass
 
 
-investigationschema = BaseSchema +  Schema((
+measurementschema = BaseSchema +  Schema((
                     
-#                    StringField('respondentid',
-#                                index='FieldIndex:Schema',
-#                                
-#                                widget=StringWidget(label='The respondentid',
-#                                                  label_msgid='respondentid',
-#                                                  description='The respondentid',
-#                                                  description_msgid='desc_respondentid',
-#                                                  i18n_domain='sl.geodialogues'),),   
-#                    
-#                    StringField('measurement',
-#                                index='FieldIndex:Schema',
-#                                
-#                                widget=StringWidget(label='The measurement',
-#                                                  label_msgid='measurement',
-#                                                  description='The measurement',
-#                                                  description_msgid='desc_measurement',
-#                                                  i18n_domain='sl.geodialogues'),),   
+                    StringField('respondentid',
+                                index='FieldIndex:Schema',
+                                
+                                widget=StringWidget(label='The respondentid',
+                                                  label_msgid='respondentid',
+                                                  description='The respondentid',
+                                                  description_msgid='desc_respondentid',
+                                                  i18n_domain='sl.geoservices'),),   
+                    
+                    StringField('measurement',
+                                index='FieldIndex:Schema',
+                                
+                                widget=StringWidget(label='The measurement',
+                                                  label_msgid='measurement',
+                                                  description='The measurement',
+                                                  description_msgid='desc_measurement',
+                                                  i18n_domain='sl.geoservices'),),   
                               ))
 
-class Investigation(I18NBaseObject, ATCTFolderMixin, BaseBTreeFolder):
-    """The investigation that can contain Measurements
+class Measurement(I18NBaseObject, BaseContent):
+    """The measurement
     """
     
-    implements(IATFolder, IInvestigation)
+    I18NBaseObject
     
-    security = ClassSecurityInfo()
-    
-    schema = investigationschema
-    meta_type = 'Investigation'
-    archetype_name = 'Investigation'
+    schema = measurementschema
+    meta_type = 'Measurement'
+    archetype_name = 'Measurement'
     _at_rename_after_creation = True    
-    content_icon = 'investigation_icon.png'
+    content_icon = 'measurement_icon.png'
     immediate_view = 'base_edit'
-    default_view   = 'investigation_view'
+    default_view   = 'measurement_view'
     global_allow = False
     
     actions = ({
@@ -100,8 +94,5 @@ class Investigation(I18NBaseObject, ATCTFolderMixin, BaseBTreeFolder):
         'gethtml'    : '',
         'mkdir'      : '',
         }
-    
-    def __init__(self, *args, **kwargs):
-        I18NBaseObject.__init__(self, *args, **kwargs)
 
-registerATCT(Investigation, PROJECTNAME)
+registerType(Measurement, PROJECTNAME)

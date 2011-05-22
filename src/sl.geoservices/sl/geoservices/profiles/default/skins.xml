@@ -57,14 +57,14 @@
     directory="Products.CMFPlone:skins/plone_wysiwyg"/>
  <object name="referencebrowser" meta_type="Filesystem Directory View"
     directory="archetypes.referencebrowserwidget:skins/referencebrowser"/>
- <object name="sl_geodialogues_custom_images"
+ <object name="sl_geoservices_custom_images"
     meta_type="Filesystem Directory View"
-    directory="sl.geodialogues:skins/sl_geodialogues_custom_images"/>
- <object name="sl_geodialogues_custom_templates"
+    directory="sl.geoservices:skins/sl_geoservices_custom_images"/>
+ <object name="sl_geoservices_custom_templates"
     meta_type="Filesystem Directory View"
-    directory="sl.geodialogues:skins/sl_geodialogues_custom_templates"/>
- <object name="sl_geodialogues_styles" meta_type="Filesystem Directory View"
-    directory="sl.geodialogues:skins/sl_geodialogues_styles"/>
+    directory="sl.geoservices:skins/sl_geoservices_custom_templates"/>
+ <object name="sl_geoservices_styles" meta_type="Filesystem Directory View"
+    directory="sl.geoservices:skins/sl_geoservices_styles"/>
  <object name="sunburst_images" meta_type="Filesystem Directory View"
     directory="plonetheme.sunburst:skins/sunburst_images"/>
  <object name="sunburst_styles" meta_type="Filesystem Directory View"
@@ -75,9 +75,9 @@
     directory="Products.TinyMCE:skins/tinymce"/>
  <skin-path name="GeoDialogues">
   <layer name="custom"/>
-  <layer name="sl_geodialogues_custom_images"/>
-  <layer name="sl_geodialogues_custom_templates"/>
-  <layer name="sl_geodialogues_styles"/>
+  <layer name="sl_geoservices_custom_images"/>
+  <layer name="sl_geoservices_custom_templates"/>
+  <layer name="sl_geoservices_styles"/>
   <layer name="sunburst_images"/>
   <layer name="sunburst_templates"/>
   <layer name="sunburst_styles"/>

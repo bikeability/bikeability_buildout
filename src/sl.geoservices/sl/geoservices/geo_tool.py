@@ -24,7 +24,7 @@ from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from zope.component import getUtility
 from zope.interface import implements
-from sl.geodialogues.interfaces import IGEOTool
+from sl.geoservices.interfaces import IGEOTool
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import ManagePortal
 

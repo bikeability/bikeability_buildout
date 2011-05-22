@@ -18,3 +18,6 @@
 # this program; if not, see <http://www.gnu.org/licenses/>.
 #
 ######################################################################################
+
+from investigation import Investigation
+from measurement import Measurement

@@ -27,18 +27,28 @@ from zope.interface import implements
 from sl.geoservices.interfaces import IGEOTool
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import ManagePortal
+from sl.geoservices.content import Investigation 
+from Products.CMFPlone.PloneBaseTool import PloneBaseTool
+from OFS.Folder import Folder
 
-class GEOTool(UniqueObject, SimpleItem):
+class GEOTool(PloneBaseTool, Folder, UniqueObject, SimpleItem):
     """The GEO Tool
     """
 
     id  = 'geo_tool'
+    toolicon = 'skins/plone_images/topic_icon.png'  
     title = 'GEO Tool'
     meta_type = 'GEO Tool'
-
-
+    meta_types = ((
+        {'name': 'GEO Services Investigation',
+         'action': 'manage_addInvestigationForm'},
+        ))
+    
+    
     implements(IGEOTool)
-
+        
+    isPrincipiaFolderish = True # Show up in the ZMI
+    
     security = ClassSecurityInfo()
     
     manage_options=(
@@ -48,7 +58,43 @@ class GEOTool(UniqueObject, SimpleItem):
          ) + SimpleItem.manage_options
         )
     
-    manage_configForm = PageTemplateFile('www/geo_tool_config', globals())
+    
+    manage_addInvestigationForm = PageTemplateFile('www/addInvestigation',
+                                                   globals())
+
+    security.declareProtected(ManagePortal, 'addInvestigation')
+    def addInvestigation(self, id, title='', investigation=None):
+        """ Add a new Investigation
+        """
+        o = Investigation(id, title)
+
+        # copy the propertysheet values onto the new instance
+        # if investigation is not None:
+#            if not hasattr(investigation, 'propertyIds'):
+#                raise TypeError, 'investigation needs to be a investigation'
+#
+#            for investigation in propertysheet.propertyMap():
+#                pid=property.get('id')
+#                ptype=property.get('type')
+#                pvalue=propertysheet.getProperty(pid)
+#                if not hasattr(o, pid):
+#                    o._setProperty(pid, pvalue, ptype)
+
+        self._setObject(id, o)
+    
+    
+    security.declareProtected(ManagePortal, 'manage_addInvestigation')
+    def manage_addInvestigation(self, id, title='',
+                                investigation=None, REQUEST=None):
+        """ Add a instance of a Property Sheet if handed a
+        propertysheet put the properties into new propertysheet.
+        """
+        self.addInvestigation(id, title, investigation)
+
+        if REQUEST is not None:
+            return self.manage_main()
+   
+#    manage_configForm = PageTemplateFile('www/geo_tool_config', globals())
     
     ## The attributes come her 
     
@@ -75,5 +121,8 @@ class GEOTool(UniqueObject, SimpleItem):
         
     def getNumberOfBad(self):
         return self.number_of_bad
+    
+    GEOTool.__doc__ = BaseTool.__doc__
         
 InitializeClass(GEOTool)
+registerToolInterface('geo_tool', IGEOTool)

@@ -18,14 +18,14 @@
 # this program; if not, see <http://www.gnu.org/licenses/>.
 #
 ######################################################################################
-
-from plone.theme.interfaces import IDefaultPloneLayer
-
-class IThemeSpecific(IDefaultPloneLayer):
-    """Marker interface that defines a Zope 3 browser layer.
+from zope.interface import Interface, Attribute
+        
+class IMeasurement(Interface):
     """
-    
-class IBikeabilityDialogue1(object):
+    """
+    pass
+
+class IInvestigation(Interface):
     """
     """
     pass

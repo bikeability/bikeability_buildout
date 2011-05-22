@@ -5,20 +5,14 @@
     i18n_domain="sl.geodialogues">
 
   <five:registerPackage package="." initialize=".initialize" />
+  
   <include package=".browser" />
+  <include package=".content" />
+  
   <include file="skins.zcml" />
   <include file="profiles.zcml" />
   
- <class class=".measurement.Measurement">
-	        <require
-	            permission="zope2.View"
-            interface=".interfaces.IMeasurement"
-            />	       
-            <require
-	            permission="cmf.ModifyPortalContent"           
-	            set_schema=".interfaces.IMeasurement"
-	            />
-	    </class>
+
 
     <!-- The tool needs this -->
     <five:deprecatedManageAddDelete class=".geo_tool.GEOTool" />

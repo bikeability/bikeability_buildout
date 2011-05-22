@@ -40,9 +40,17 @@
 		class=".bikeability_dialogue.BikeabilityDialogue1"
 		layer=".interfaces.IThemeSpecific"
 		/>
+
+    <browser:page
+		for="sl.geodialogues.content.investigation.Investigation"
+		name="investigation_view"
+		permission="zope2.View"
+		class=".investigation_view.InvestigationView"
+		layer=".interfaces.IThemeSpecific"
+		/>
 		
     <browser:page
-		for="*"
+		for="sl.geodialogues.content.measurement.Measurement"
 		name="measurement_view"
 		permission="zope2.View"
 		class=".measurement_view.MeasurementView"
@@ -66,7 +74,7 @@
 		/>  
     <browser:page
 		for="*"
-		name="js_bootstrap"
+		name="js_bootstrap.js"
 		permission="zope2.View"
 		class=".js_bootstrap.JSBootstrap"
 		layer=".interfaces.IThemeSpecific"

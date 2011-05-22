@@ -18,13 +18,29 @@
 # this program; if not, see <http://www.gnu.org/licenses/>.
 #
 ######################################################################################
-from Products.Archetypes.public import BaseSchema, Schema
-from Products.Archetypes.public import StringField, StringWidget
-from Products.Archetypes.public import TextField, TextAreaWidget
-from Products.Archetypes.public import ImageField, ImageWidget
-from Products.Archetypes.public import BaseContent, registerType
+from AccessControl import ClassSecurityInfo
+from Products.ATContentTypes.interface import IATFolder
+from Products.Archetypes import atapi
+from Products.Archetypes.public import BaseContent, registerType, BaseSchema, \
+    Schema, ImageField, ImageWidget, StringField, StringWidget, TextField, \
+    TextAreaWidget
 from Products.CMFCore import permissions
-from config import PROJECTNAME
+from sl.geodialogues.config import PROJECTNAME
+from sl.geodialogues.content.interfaces import IMeasurement
+
+try:
+    from Products.LinguaPlone.I18NBaseObject import I18NBaseObject
+    print "Linguaplone found !!"
+except:
+    class I18NBaseObject(object):
+        """A dummy class if Linguaplone is not here
+        """
+            
+        __implements__ = ()
+             
+        def manage_beforeDelete(self, item, container):
+            pass
+
 
 measurementschema = BaseSchema +  Schema((
                     
@@ -47,17 +63,20 @@ measurementschema = BaseSchema +  Schema((
                                                   i18n_domain='sl.geodialogues'),),   
                               ))
 
-class Measurement(BaseContent):
+class Measurement(I18NBaseObject, BaseContent):
     """The measurement
     """
+    
+    I18NBaseObject
+    
     schema = measurementschema
-    meta_type = 'Link'
+    meta_type = 'Measurement'
     archetype_name = 'Measurement'
     _at_rename_after_creation = True    
-    # content_icon = 'spotlight_icon.png'
+    content_icon = 'measurement_icon.png'
     immediate_view = 'base_edit'
-    # default_view   = 'spotlight_view'
-    global_allow = True
+    default_view   = 'measurement_view'
+    global_allow = False
     
     actions = ({
         'id': 'view',

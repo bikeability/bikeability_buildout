@@ -1,0 +1,28 @@
+<configure
+		xmlns="http://namespaces.zope.org/zope"
+		xmlns:five="http://namespaces.zope.org/five"
+		i18n_domain="wdh.types">   
+		
+		<class class=".investigation.Investigation">
+			<require
+				permission="zope2.View"
+				interface=".interfaces.IInvestigation"
+			/>
+			<require
+				permission="cmf.ModifyPortalContent"
+				set_schema=".interfaces.IInvestigation"
+			/>
+		</class>
+		
+		 <class class=".measurement.Measurement">
+	        <require
+	            permission="zope2.View"
+            	interface=".interfaces.IMeasurement"
+            />	       
+            <require
+	            permission="cmf.ModifyPortalContent"           
+	            set_schema=".interfaces.IMeasurement"
+	            />
+	    </class>
+		
+</configure>

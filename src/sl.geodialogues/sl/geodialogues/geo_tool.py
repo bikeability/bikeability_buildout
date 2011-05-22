@@ -36,6 +36,7 @@ class GEOTool(UniqueObject, SimpleItem):
     title = 'GEO Tool'
     meta_type = 'GEO Tool'
 
+
     implements(IGEOTool)
 
     security = ClassSecurityInfo()
@@ -50,8 +51,12 @@ class GEOTool(UniqueObject, SimpleItem):
     manage_configForm = PageTemplateFile('www/geo_tool_config', globals())
     
     ## The attributes come her 
-    canoncial_story_of_the_day_UID = ""
     
+    number_of_good = 3
+    number_of_bad = 3
+    
+    def __init__(self):
+        self.id = 'geo_tool'
     
     security.declareProtected(ManagePortal, 'manage_setGEOToolSettings')
     def manage_setGEOToolSettings(self, canoncial_story_of_the_day_UID,
@@ -63,8 +68,12 @@ class GEOTool(UniqueObject, SimpleItem):
         if REQUEST:
             REQUEST.RESPONSE.redirect(REQUEST['HTTP_REFERER'])
     
-    def __init__(self):
-        self.id = 'geo_tool'
+    
         
+    def getNumberOfGood(self):
+        return self.number_of_good
+        
+    def getNumberOfBad(self):
+        return self.number_of_bad
         
 InitializeClass(GEOTool)

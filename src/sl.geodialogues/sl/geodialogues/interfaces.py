@@ -24,9 +24,3 @@ from zope.interface import Interface, Attribute
 class IGEOTool(Interface):
     """
     """
-    
-        
-class IMeasurement(Interface):
-    """
-    """
-    pass

@@ -20,7 +20,7 @@ i18n:domain="sl.bikeability">
 			tal:define="request request|here/request|container/request|nothing;">
 				<div tal:define="respondentid request/respondentid|view/respondentid">
 					<div id="headline">
-						<h2>
+						<h2 tal:content="view/getServiceH1">
 							GODE OG D&Aring;RLIGE OPLEVELSER P&Aring; CYKELTUREN
 						</h2>
 						<div>

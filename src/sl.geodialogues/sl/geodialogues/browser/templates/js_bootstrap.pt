@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal"
+	  xmlns:metal="http://xml.zope.org/namespaces/metal"
+	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+	  lang="en"
+	  i18n:domain="sl.bikeability"
+	  tal:omit-tag="">
+	  
+	  <tal:js tal:content="view/getGOODString"></tal:js>
+	  <tal:js tal:content="view/getBADString"></tal:js>	  
+	  
+	  <tal:js tal:content="view/getGOODMarkers"></tal:js>
+	  <tal:js tal:content="view/getBADMarkers"></tal:js>
+	  
+	   <tal:js tal:content="view/getMapCenterLAT"></tal:js>
+	   <tal:js tal:content="view/getMapCenterLON"></tal:js>
+	   <tal:js tal:content="view/getMapZoomFactor"></tal:js>
+	   
+	   
+	   <tal:js tal:content="view/GetPolyLineColour"></tal:js>
+	    
+	    
+	   
+</html>

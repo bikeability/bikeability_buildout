@@ -40,13 +40,55 @@ class JSBootstrap(BrowserView):
     def getGOODString(self):
         """
         """
-        import pdb;pdb.set_trace()
+        atvm = self.getATVM()
+        
+        good = atvm.getVocabularyByName("good")
+        vd = good.getVocabularyLines()
+        vd.reverse()
         gs = ""
-        for x in []:
-            gs = gs + "['0','V&aelig;lg']",
-        return "var GOOD_GROUP_VALUES = []"
+        for v in vd:
+            s = "['%s','%s']" % (v[0],v[1])
+            gs = gs + "%s," % s
+
+        return "var GOOD_GROUP_VALUES = [%s];" % gs
         
     def getBADString(self):
         """
         """
-        return "var BAD_GROUP_VALUES = []"
+        return "var BAD_GROUP_VALUES = [];"
+    
+    def getATVM(self):
+        return getSite().get("portal_vocabularies")
+    
+    def getGeoTool(self):
+        return getSite().get("geo_tool", None)
+    
+    def getGOODMarkers(self):
+        nfg = self.getGeoTool().getNumberOfGood()
+        s = "var GOOD_markers = ["
+        for n in range(nfg):
+            s = s + "null,"
+        s = s + "];"
+        return s
+    
+    def getBADMarkers(self):
+        nfg = self.getGeoTool().getNumberOfBad()
+        s = "var BAD_markers = ["
+        for n in range(nfg):
+            s = s + "null,"
+        s = s + "];"
+        return s
+    
+    def getMapCenterLAT(self):
+        return "MAPCENTERLAT = 55.684166;"
+    
+    def getMapCenterLON(self):
+        return "MAPCENTERLON = 12.544606;"
+    
+    def getMapZoomFactor(self):
+        return "MAPZOOMFACTOR = 12;"
+            
+    def GetPolyLineColour(self):
+        return """POLYLINECOLOUR = "#3355FF";"""
+        
+        

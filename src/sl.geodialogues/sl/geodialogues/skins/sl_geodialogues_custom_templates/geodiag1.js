@@ -11,41 +11,6 @@ var STATE = 1;
 var polyLineListener = null;
 var polyLineListenerMarker = null;
 
-
-var GOOD_GROUP_VALUES = [['0','V&aelig;lg'],
-						 ['god_sti_bel','God cykelsti/bel&aelig;gning'],
-						 ['god_cykel_park','God cykelparkering'],
-						 ['smuk_groen_omgiv','Smukke, gr&oslash;nne omgivelser'],
-						 ['god_fremk','God fremkommelighed, f&aring; stops'],
-						 ['ned_bakke', 'Det g&aring;r ned ad bakke'],
-						 ['god_udsigt','God udsigt'],
-						 ['mulighed_koere_staerkt', 'Mulighed for at k&oslash;re st&aelig;rkt'],
-						 ['andre_cyklister','Andre cyklister'],
-						 ['andre_cyklister_smiler','Andre cyklister, der smiler'],
-						 ['andet','Andet']
-						 ];
-						 
-
-var BAD_GROUP_VALUES = [['0','V&aelig;lg'],
-					    ['farligt_kryds','Farligt kryds'],
-					    ['larm_forurening','Larm/forurening'],
-					    ['vejarbejde','Vejarbejde'],
-					    ['fordg_pa_cykelsti','Fodg&aelig;ngere p&aring; cykelstien/vejbanen'],
-					    ['biler_taet_paa','Biler, busser og lastbiler t&aelig;t p&aring;'],
-					    ['manglende_cykelpark','Manglende cykelparkering'],
-					    ['daarlig_beleagn','D&aring;rlig bel&aelig;gning/huller i asfalten'],
-					    ['biler_parkeret','Biler mm. parkeret p&aring; cykelstien'],
-					    ['op_ad_bakke','Det g&aring;r op ad bakke'],
-					    ['andre_cyk','Andre cyklister'],
-					    ['andre_cyk_raaber','Andre cyklister, der r&aring;ber/sk&aeliglder ud'],
-					    ['for_mange_andre','For mange andre cyklister'],
-					    ['andet','Andet']
-					    ];
-
-
-var GOOD_markers = [null,null,null];
-var BAD_markers = [null,null,null];
-
 var GOOD_listener = null;
 var BAD_listener = null;
 var markerListeners = [];
@@ -65,14 +30,12 @@ $(document).ajaxStart(function(){
   $('#ajaxBusy').hide();
 });
 
-
-
 function initMap(mapHolder) {
 	markers = [];
 	vmarkers = [];
 	var mapOptions = {
-		zoom: 12,
-		center: new google.maps.LatLng(55.684166, 12.544606),
+		zoom: MAPZOOMFACTOR,
+		center: new google.maps.LatLng(MAPCENTERLAT, MAPCENTERLON),
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		draggableCursor: 'auto',
 		draggingCursor: 'move',
@@ -86,12 +49,12 @@ function initMap(mapHolder) {
 
 function initPolyline() {
 	var polyOptions = {
-		strokeColor: "#3355FF",
+		strokeColor: POLYLINECOLOUR,
 		strokeOpacity: 0.8,
 		strokeWeight: 4
 	};
 	var tmpPolyOptions = {
-		strokeColor: "#3355FF",
+		strokeColor: POLYLINECOLOUR,
 		strokeOpacity: 0.4,
 		strokeWeight: 4
 	};
@@ -1069,7 +1032,7 @@ function initMeasurementView() {
 		
 	}
 	
-	var polyOptions = {strokeColor: "#3355FF", strokeOpacity: 0.8, strokeWeight: 4 };
+	var polyOptions = {strokeColor: POLYLINECOLOUR, strokeOpacity: 0.8, strokeWeight: 4 };
 	
 	var poly = new google.maps.Polyline(polyOptions);
 	poly.setMap(map);

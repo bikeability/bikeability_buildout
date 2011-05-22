@@ -6,7 +6,8 @@ VIEW_CONTENTS_PERMISSION = permissions.View
 PROJECTNAME = "sl.geodialogues"
 SKINS_DIR = 'skins'
 ADD_PERMISSIONS = {
-                  "Measurement" : "sl.geoldialogues:Measurement"}
+                  "Measurement"   : "sl.geoldialogues:Measurement",
+                  "Investigation" : "sl.geoldialogues:Investigation"}
 
 VIEWLETS = []
 

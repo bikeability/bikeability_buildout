@@ -1,5 +1,6 @@
-#Fri May 20 11:54:02 CEST 2011
+#Sun May 22 14:15:36 CEST 2011
 eclipse.preferences.version=1
+encoding//eggs/plone.app.discussion-2.0b1-py2.6.egg/plone/app/discussion/browser/comments.py=utf-8
 encoding//src/sl.geodialogues/setup.py=utf-8
 encoding//src/sl.geodialogues/sl/__init__.py=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/__init__.py=utf-8
@@ -7,13 +8,17 @@ encoding//src/sl.geodialogues/sl/geodialogues/browser/bikeability_dialogue.py=UT
 encoding//src/sl.geodialogues/sl/geodialogues/browser/config.py=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/geo_config_form.py=utf-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/interfaces.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/browser/investigation_view.py=utf-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/js_bootstrap.py=utf-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/measurement_view.py=utf-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/save_shp_file.py=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/browser/viewlets.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/content/__init__.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/content/interfaces.py=utf-8
+encoding//src/sl.geodialogues/sl/geodialogues/content/investigation.py=UTF-8
+encoding//src/sl.geodialogues/sl/geodialogues/content/measurement.py=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/geo_tool.py=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/interfaces.py=utf-8
-encoding//src/sl.geodialogues/sl/geodialogues/measurement.py=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/setuphandlers.py=utf-8
 encoding//src/sl.geodialogues/sl/geodialogues/skins/sl_geodialogues_custom_templates/geodiag1.js=UTF-8
 encoding//src/sl.geodialogues/sl/geodialogues/tests.py=utf-8

@@ -14,8 +14,8 @@ packageName = __name__
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
-    from sl.geoservices.measurement import Measurement
-    from sl.geoservices.investigation import Investigation
+    from sl.geoservices.content.measurement import Measurement
+    from sl.geoservices.content.investigation import Investigation
     
     content_types, constructors, ftis = atapi.process_types(
         atapi.listTypes(config.PROJECTNAME),

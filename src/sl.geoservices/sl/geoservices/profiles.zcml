@@ -5,9 +5,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="GeoDialogues"
+      title="GeoServices"
       directory="profiles/default"
-      description='Extension profile for the "GeoDialogues" Plone theme.'
+      description='Extension profile for the GeoServices Application.'
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

@@ -3,9 +3,9 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
 
  <configlet
- 	title="GeoDialogue Settings" 
- 	action_id="GeoDialogueSettings" 
- 	appId="GeoDialogueSettingsID"
+ 	title="GeoServices Settings" 
+ 	action_id="GeoServicesSettings" 
+ 	appId="GeoServicesSettingsID"
     category="Products"
     condition_expr=""
     icon_expr="string:$portal_url/geo_icon.gif"
